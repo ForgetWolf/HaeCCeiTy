@@ -12,11 +12,9 @@ import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.material.icons.rounded.SaveAlt
 import androidx.compose.material.icons.rounded.SwapVert
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.matrix.vector.ui.ChoiceRow
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.SheetAction
 import org.matrix.vector.ui.SheetHeading
 import org.matrix.vector.ui.ToggleRow
@@ -846,8 +844,7 @@ private fun ScopeSheet(
     onDismiss: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
         LocalizedOverlay {
             Column(Modifier.verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
                 SheetHeading(title, icon)

@@ -62,7 +62,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
@@ -74,8 +73,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -108,6 +105,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import org.matrix.vector.ui.LocalDialogLocalizer
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.PanelHeader
 import org.matrix.vector.ui.SearchField
 import org.matrix.vector.ui.SharedAlertDialog
@@ -751,10 +749,9 @@ private fun LogSettingsSheet(
     val enabled by viewModel.verboseEnabled.collectAsStateWithLifecycle()
     val enforced by viewModel.verboseEnforced.collectAsStateWithLifecycle()
     val inlineTraces by viewModel.tracesInline.collectAsStateWithLifecycle()
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
     val resetKind = viewModel.resetKind
 
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
         LocalDialogLocalizer.current {
             Column(Modifier.verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
                 Text(
@@ -1034,8 +1031,7 @@ private fun LogFilterSheet(
     onToggleTag: (String) -> Unit,
     onClear: () -> Unit,
 ) {
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
         LocalDialogLocalizer.current {
             Column(
                 Modifier.verticalScroll(rememberScrollState())

@@ -28,10 +28,18 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-/** Material sheet with a downward predictive-back preview instead of predictive scaling. */
+/**
+ * Shared template for manager bottom sheets: downward predictive-back preview, cancellation
+ * restores the panel, and committed Back continues the same translation until it is off-screen.
+ * Material still owns opening, dragging, scrolling and the half/fully-expanded anchors.
+ *
+ * Put panel contents in [content]; use [modifier] for panel-specific size constraints. Keep Back
+ * handling here so every panel uses the same motion and scrim instead of drifting independently.
+ */
 @Composable
 fun PredictiveBackBottomSheet(
     onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
@@ -56,7 +64,7 @@ fun PredictiveBackBottomSheet(
             shouldDismissOnBackPress = false,
             shouldDismissOnClickOutside = !gestureActive && !dismissing,
         ),
-        modifier = Modifier.onSizeChanged { sheetHeight = it.height }.graphicsLayer {
+        modifier = modifier.onSizeChanged { sheetHeight = it.height }.graphicsLayer {
             translationY = slideDistance * slide.value.coerceIn(0f, 1f)
         },
         scrimColor = scrim.copy(alpha = scrim.alpha * (1f - slide.value.coerceIn(0f, 1f))),

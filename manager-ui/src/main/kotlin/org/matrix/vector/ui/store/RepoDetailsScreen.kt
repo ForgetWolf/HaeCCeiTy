@@ -1,13 +1,12 @@
 package org.matrix.vector.ui.store
 
 import org.matrix.vector.ui.R as UiR
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.ToggleRow
 import org.matrix.vector.ui.ScrollingLabel
 import org.matrix.vector.ui.SheetHeading
 import org.matrix.vector.ui.sheetRowColors
 import org.matrix.vector.ui.theme.Mono
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material.icons.rounded.NotificationsOff
 import androidx.compose.material.icons.rounded.MoreVert
@@ -57,7 +56,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.PrimaryTabRow
@@ -271,8 +269,7 @@ fun RepoDetailsScreen(
 
     if (optionsOpen) {
         val muted by viewModel.updatesMuted.collectAsState()
-        val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-        ModalBottomSheet(onDismissRequest = { optionsOpen = false }, sheetState = sheetState) {
+        PredictiveBackBottomSheet(onDismissRequest = { optionsOpen = false }) {
             Column(Modifier.padding(bottom = 24.dp)) {
                 SheetHeading(stringResource(UiR.string.store_options), Icons.Rounded.Tune)
                 ToggleRow(
@@ -710,7 +707,7 @@ private fun InfoRow(
 @Composable
 private fun AssetSheet(release: Release, onDismiss: () -> Unit, onPick: (ReleaseAsset) -> Unit) {
     val context = LocalContext.current
-    ModalBottomSheet(onDismissRequest = onDismiss) {
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
         Text(
             text = stringResource(UiR.string.store_download_files),
             style = MaterialTheme.typography.titleMedium,

@@ -1,6 +1,7 @@
 package org.matrix.vector.manager.ui.components
 
 import org.matrix.vector.ui.AppIcon
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.SnackbarTone
 import org.matrix.vector.ui.SharedAlertDialog
 import org.matrix.vector.ui.R as UiR
@@ -40,11 +41,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -240,11 +238,6 @@ fun PackageActionSheet(
     }
 
     val colors = MaterialTheme.colorScheme
-    // Every value left enabled, rather than dropping PartiallyExpanded: that stop is the only
-    // thing a drag on a sheet can *do* other than dismiss it, so a sheet taller than half the
-    // screen would open at full height and could not be made smaller.
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-
     // Never shorter than the stop it opens at.
     //
     // Material offers the PartiallyExpanded anchor only to a sheet taller than half its container
@@ -327,10 +320,9 @@ fun PackageActionSheet(
         )
     }
 
-    ModalBottomSheet(
+    PredictiveBackBottomSheet(
         onDismissRequest = onDismiss,
         modifier = Modifier.heightIn(min = minSheetHeight),
-        sheetState = sheetState,
     ) {
 LocalizedOverlay {
 

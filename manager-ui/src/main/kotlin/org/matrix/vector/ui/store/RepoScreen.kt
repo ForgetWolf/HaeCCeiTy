@@ -6,10 +6,8 @@ import androidx.compose.material.icons.automirrored.rounded.Sort
 import androidx.compose.material.icons.rounded.LowPriority
 import androidx.compose.material.icons.rounded.NewReleases
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import org.matrix.vector.ui.ChoiceRow
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.ScrollingLabel
 import org.matrix.vector.ui.SheetHeading
 import androidx.compose.foundation.clickable
@@ -296,13 +294,7 @@ private fun StoreFilterSheet(
     onChannelChange: (StoreChannel) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    // Every value left enabled rather than dropping PartiallyExpanded, which would remove the
-    // half-height stop — the only thing a drag on a sheet can do other than dismiss it. Material
-    // caps that stop at the sheet's own height, so short sheets still open at their own height and
-    // nothing gains a useless drag.
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-
-    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
         Column(Modifier.verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
             SheetHeading(stringResource(R.string.store_group_sort), Icons.AutoMirrored.Rounded.Sort)
             ChoiceRow {
