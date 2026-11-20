@@ -15,6 +15,10 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.ui.platform.LocalContext
 import org.matrix.vector.manager.R
 import androidx.compose.foundation.layout.fillMaxSize
@@ -71,6 +75,8 @@ import org.matrix.vector.ui.store.RepoScreen
 @Composable
 fun VectorApp() {
     val navigator = rememberNavigator(VectorNavPanelStore, TOP_LEVEL_DESTINATIONS)
+    val backAnimationDuration =
+        LocalContext.current.resources.getInteger(android.R.integer.config_shortAnimTime)
 
     // Where the launch intent asked to open. The activity has no back stack to act on, so it leaves
     // the destination here and this is the first place there is one — on a cold start the splash is
@@ -132,6 +138,15 @@ fun VectorApp() {
                 NavDisplay(
                     backStack = navigator.backStack,
                     onBack = { navigator.back() },
+                    // Reuse the old Fragment fade timing, with no page scaling on return.
+                    popTransitionSpec = {
+                        fadeIn(tween(backAnimationDuration)) togetherWith
+                            fadeOut(tween(backAnimationDuration))
+                    },
+                    predictivePopTransitionSpec = {
+                        fadeIn(tween(backAnimationDuration)) togetherWith
+                            fadeOut(tween(backAnimationDuration))
+                    },
                     entryDecorators = listOf(
                         rememberSaveableStateHolderNavEntryDecorator(),
                         rememberViewModelStoreNavEntryDecorator(),
