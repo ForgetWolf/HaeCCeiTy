@@ -116,7 +116,19 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          ./gradlew zipAll
+          set +e
+          ./gradlew zipAll --console=plain 2>&1 | tee "$RUNNER_TEMP/vector-build.log"
+          build_status=${PIPESTATUS[0]}
+          if [ "$build_status" -ne 0 ]; then
+            python3 - "$RUNNER_TEMP/vector-build.log" <<'PY'
+          import pathlib, sys
+          lines = pathlib.Path(sys.argv[1]).read_text(errors="replace").splitlines()
+          summary = "\n".join(lines[-100:])
+          escaped = summary.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+          print(f"::error title=Gradle build failed::{escaped}")
+          PY
+          fi
+          exit "$build_status"
 
       - name: Prepare artifact
         if: success()
