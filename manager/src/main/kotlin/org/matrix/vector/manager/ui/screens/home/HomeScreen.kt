@@ -45,6 +45,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.matrix.vector.manager.R
@@ -83,7 +84,9 @@ fun HomeScreen(
                     DropdownMenu(
                         expanded = menuOpen,
                         onDismissRequest = { menuOpen = false },
-                        modifier = Modifier.widthIn(min = 224.dp, max = 280.dp),
+                        modifier = Modifier.widthIn(min = 192.dp, max = 280.dp),
+                        offset = DpOffset(x = (-16).dp, y = 0.dp),
+                        shape = MaterialTheme.shapes.large,
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
                     ) {
                         DropdownMenuItem(

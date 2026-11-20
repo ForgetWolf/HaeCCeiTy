@@ -39,9 +39,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.border
 import org.matrix.vector.ui.contextClickable
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.Launch
@@ -54,6 +52,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -104,7 +103,6 @@ import org.matrix.vector.manager.R
 import org.matrix.vector.manager.data.model.AppInfo
 import org.matrix.vector.manager.di.ServiceLocator
 import org.matrix.vector.ui.AppIcon
-import org.matrix.vector.ui.SelectionBadge
 import org.matrix.vector.ui.SnackbarTone
 import org.matrix.vector.ui.SharedSnackbarHost
 import org.matrix.vector.ui.show
@@ -918,20 +916,11 @@ private enum class ScopeOrigin {
 @Composable
 private fun ScopeOrigin.color(): Color =
     when (this) {
-        // Locked and Requested are the same claim by the module — it named this app — and the tick
-        // beside either is the reader's to give or to take back, so they share the colour that
-        // invites a tap. It matters most under a static scope, where the list is the declared set
-        // and so every row of it is Locked: an outline meaning "not yours to change" would be
-        // saying that about every row of a list the reader is expected to work through. What is
-        // fixed there is which apps may be listed at all, which is a property of the list and not
-        // of any row in it — the caption says so, and the dead filter button and its snackbar say
-        // it in full.
+        // Keep the module's declared/requested scope identifiable in the supporting text.
         ScopeOrigin.Locked,
         ScopeOrigin.Requested -> MaterialTheme.colorScheme.primary
         ScopeOrigin.Chosen -> Color.Transparent
-        // The one ring that does mean "not yours": a derived row is the only row on this screen
-        // that refuses a tap, because nothing here writes it and nothing here can take it away. The
-        // disabled-ish outline says so before the caption below it does.
+        // Derived scope is not editable; its caption and disabled checkbox explain that.
         ScopeOrigin.Derived -> MaterialTheme.colorScheme.outline
     }
 
@@ -961,7 +950,7 @@ private fun AppRow(
 ) {
     var menuOpen by remember { mutableStateOf(false) }
     val haptics = LocalHapticFeedback.current
-    val ring = origin.color()
+    val originColor = origin.color()
 
     ListItem(
         modifier =
@@ -979,20 +968,12 @@ private fun AppRow(
                     toggleableState = if (app.isSelectedInScope) ToggleableState.On else ToggleableState.Off
                 },
         leadingContent = {
-            // The ring is drawn outside the icon rather than tinting it: an app icon is the user's
-            // own landmark for finding a row and recolouring it would destroy that.
-            Box {
-                AppIcon(
-                    applicationInfo = app.applicationInfo,
-                    contentDescription = null,
-                    size = 36.dp,
-                    modifier =
-                        Modifier.border(width = 2.dp, color = ring, shape = CircleShape).padding(4.dp),
-                )
-                if (app.isSelectedInScope) {
-                    SelectionBadge(Modifier.align(Alignment.BottomEnd))
-                }
-            }
+            AppIcon(
+                applicationInfo = app.applicationInfo,
+                contentDescription = null,
+                size = 36.dp,
+                modifier = Modifier.padding(4.dp),
+            )
         },
         supportingContent = {
             Column {
@@ -1006,7 +987,7 @@ private fun AppRow(
                         text = stringResource(origin.labelRes()),
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.SemiBold,
-                        color = ring,
+                        color = originColor,
                     )
                 }
                 // Why this row does not behave like the rest: the framework is one process shared
@@ -1020,6 +1001,14 @@ private fun AppRow(
                     )
                 }
             }
+        },
+        trailingContent = {
+            // The row owns toggling, including taps on this passive checkbox.
+            Checkbox(
+                checked = app.isSelectedInScope,
+                onCheckedChange = null,
+                enabled = enabled,
+            )
         },
         colors =
             ListItemDefaults.colors(
