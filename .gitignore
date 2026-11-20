@@ -1,0 +1,16 @@
+.project
+.settings
+.cache
+*.iml
+.gradle
+# Where the Kotlin plugin keeps its per-build session marker; a build leaves one behind.
+.kotlin
+/local.properties
+/.idea
+.DS_Store
+build
+/captures
+bin/
+
+# Keep the local project readme out of this fork.
+/README.md
