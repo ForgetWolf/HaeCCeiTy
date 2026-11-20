@@ -267,7 +267,7 @@ subprojects {
             buildFeatures.buildConfig = true
             externalNativeBuild.cmake {
                 // Keep Android C++ module scanning independent of host GCC std modules.
-                version = "3.31.8"
+                version = "3.31.10"
                 buildStagingDirectory = layout.buildDirectory.get().asFile
             }
 

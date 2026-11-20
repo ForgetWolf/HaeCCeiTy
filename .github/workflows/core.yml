@@ -113,7 +113,7 @@ jobs:
       - name: Setup CMake
         run: |
           python3 -m venv "$RUNNER_TEMP/cmake-venv"
-          "$RUNNER_TEMP/cmake-venv/bin/pip" install cmake==3.31.8
+          "$RUNNER_TEMP/cmake-venv/bin/pip" install cmake==3.31.10
           echo "$RUNNER_TEMP/cmake-venv/bin" >> "$GITHUB_PATH"
 
       - name: Remove Android's cmake
