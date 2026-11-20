@@ -223,6 +223,7 @@ private fun EntryProviderScope<NavKey>.registerRoutes(navigator: Navigator) {
         TroubleshootScreen(
             onNavigateBack = { navigator.back() },
             onOpenUrl = { url -> navigator.go(Web(url)) },
+            onOpenCanary = { navigator.go(Canary) },
         )
     }
     entry<Canary> {
