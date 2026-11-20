@@ -17,7 +17,6 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.SELinux
 import android.os.SystemProperties
-import android.util.Log
 import android.view.IWindowManager
 import hidden.HiddenApiBridge
 import io.github.libxposed.service.IXposedService
@@ -44,6 +43,7 @@ import org.matrix.vector.daemon.utils.RootImplementation
 import org.matrix.vector.daemon.utils.applyXspaceWorkaround
 import org.matrix.vector.daemon.utils.getRealUsers
 import rikka.parcelablelist.ParcelableListSlice
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorManagerService"
 
@@ -280,8 +280,23 @@ object ManagerService : IManagerService.Stub() {
   override fun isVerboseLogEnabled() = PreferenceStore.isVerboseLogEnabled()
 
   override fun setVerboseLogEnabled(enabled: Boolean) {
-    PreferenceStore.setVerboseLog(enabled)
-    if (isVerboseLogEnabled()) LogcatMonitor.startVerbose() else LogcatMonitor.stopVerbose()
+    setLogLevel(if (enabled) 2 else 0)
+  }
+
+  override fun getLogLevel(): Int = PreferenceStore.getLogLevel()
+
+  @Synchronized
+  override fun setLogLevel(level: Int) {
+    require(level in 0..2)
+    val previous = getLogLevel()
+    LogcatMonitor.configure(level)
+    try {
+      PreferenceStore.setLogLevel(level)
+      check(getLogLevel() == level) { "Log level was not saved" }
+    } catch (error: Throwable) {
+      LogcatMonitor.configure(previous)
+      throw error
+    }
   }
 
   override fun getLogParts(verbose: Boolean): List<String> = FileSystem.listLogParts(verbose)

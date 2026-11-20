@@ -7,7 +7,6 @@ import android.os.SELinux
 import android.system.ErrnoException
 import android.system.Os
 import android.system.OsConstants
-import android.util.Log
 import java.io.File
 import java.io.FileDescriptor
 import java.io.FileInputStream
@@ -16,6 +15,7 @@ import java.nio.file.Paths
 import kotlinx.coroutines.launch
 import org.matrix.vector.ipc.IManagerService
 import org.matrix.vector.daemon.VectorDaemon
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorDex2Oat"
 

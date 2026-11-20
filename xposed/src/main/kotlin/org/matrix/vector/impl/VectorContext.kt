@@ -196,6 +196,6 @@ class VectorContext(
                 append("\n").append(Log.getStackTraceString(tr))
             }
         }
-        Log.println(priority, finalTag, fullMsg)
+        Log.module(priority, finalTag, fullMsg)
     }
 }

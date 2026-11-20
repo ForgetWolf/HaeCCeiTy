@@ -1,6 +1,7 @@
 #pragma once
 
 #include <android/log.h>
+#include "log_policy.h"
 #include <fmt/format.h>
 
 #include <array>
@@ -67,6 +68,7 @@
 namespace vector::native::detail {
 template <typename... T>
 inline void LogToAndroid(int prio, const char *tag, fmt::format_string<T...> fmt, T &&...args) {
+    if (!VectorLogAllowed(prio)) return;
     // Using a stack-allocated buffer for performance.
     std::array<char, 1024> buf{};
     // format_to_n is safe against buffer overflows.

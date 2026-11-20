@@ -97,4 +97,18 @@
     <string name="logs_clear_confirm">Wyczyść</string>
     <string name="logs_clear_done">Dziennik został wyczyszczony</string>
     <string name="logs_clear_unreachable">Nie udało się wyczyścić dziennika</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Poziom rejestrowania</string>
+    <string name="logs_capture_off">Wyłączone</string>
+    <string name="logs_capture_basic">Podstawowy</string>
+    <string name="logs_capture_detailed">Szczegółowy</string>
+    <string name="logs_capture_off_summary">Zatrzymuje nowe logi frameworka i menedżera, w tym raporty o awariach. Istniejące logi zostają zachowane.</string>
+    <string name="logs_capture_basic_summary">Rejestruje wyniki uruchamiania i ładowania, ostrzeżenia oraz błędy.</string>
+    <string name="logs_capture_detailed_summary">Rejestruje też komunikaty modułów i szczegóły debugowania.</string>
+    <string name="logs_capture_failed">Nie można odczytać ani zmienić poziomu rejestrowania. Otwórz ponownie ustawienia lub spróbuj jeszcze raz.</string>
+    <string name="logs_capture_unknown_summary">Bieżący poziom rejestrowania nie jest jeszcze dostępny.</string>
+    <string name="logs_filter_writers">Aplikacja</string>
+    <string name="logs_filter_none">Brak dalszych opcji filtrowania</string>
+    <string name="logs_filter_clear_writer">Wyczyść filtr aplikacji</string>
 </resources>

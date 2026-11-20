@@ -42,6 +42,10 @@ jobs:
         run: |
           python3 manager/tools/check_translations.py manager/src/main/res
           python3 manager/tools/check_translations.py daemon/src/main/res
+          python3 manager/tools/check_translations.py manager-ui/src/main/res
+
+      - name: Check native log capture policy
+        run: python3 daemon/tools/test_log_capture.py
 
       # A missing secret used to be skipped over in silence, and the build carried on to publish a
       # canary or a tag signed with the debug key — which the daemon's InstallerVerifier rejects,

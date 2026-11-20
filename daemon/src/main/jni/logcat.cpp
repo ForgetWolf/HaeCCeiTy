@@ -14,6 +14,7 @@
 #include <array>
 #include <string_view>
 #include <thread>
+#include <mutex>
 
 using namespace std::string_view_literals;
 using namespace std::chrono_literals;
@@ -62,12 +63,26 @@ struct UniqueFd {
 };
 }  // namespace
 
+class Logcat;
+namespace {
+std::mutex capture_mutex;
+int capture_level = 0;
+unsigned refresh_mask = 3;
+Logcat* active_logcat = nullptr;
+}
+
 class Logcat {
 public:
     Logcat(JNIEnv* env, jobject thiz, jmethodID method)
         : env_(env), thiz_(thiz), refresh_fd_method_(method) {}
 
     [[noreturn]] void Run();
+    // Called only while holding capture_mutex, including from binder threads.
+    void CloseFiles() {
+        modules_fd_.reset(-1);
+        verbose_fd_.reset(-1);
+        modules_written_ = verbose_written_ = 0;
+    }
 
 private:
     void RefreshFd(bool is_verbose);
@@ -89,7 +104,7 @@ private:
     size_t verbose_part_ = 0;
 
     pid_t my_pid_ = getpid();
-    bool verbose_enabled_ = true;
+
 };
 
 // 'Scatter-Gather' I/O (writev)
@@ -121,7 +136,9 @@ size_t Logcat::FastWrite(const AndroidLogEntry& entry, int fd) {
 }
 
 void Logcat::LogRaw(std::string_view str) {
-    if (verbose_enabled_ && verbose_fd_ >= 0) write(verbose_fd_, str.data(), str.size());
+    std::lock_guard lock(capture_mutex);
+    if (capture_level == 0) return;
+    if (verbose_fd_ >= 0) write(verbose_fd_, str.data(), str.size());
     if (modules_fd_ >= 0) write(modules_fd_, str.data(), str.size());
 }
 
@@ -171,14 +188,23 @@ void Logcat::OnCrash(int err) {
 }
 
 void Logcat::ProcessBuffer(struct log_msg* buf) {
+    std::lock_guard lock(capture_mutex);
+    if (capture_level == 0) return;
     AndroidLogEntry entry;
     if (android_log_processLogBuffer(&buf->entry, &entry) < 0) return;
+    const unsigned pending = refresh_mask;
+    refresh_mask = 0;
+    if (pending & 1) RefreshFd(false);
+    if (pending & 2) RefreshFd(true);
 
     // Zero-copy tag extraction (excluding null terminator)
     std::string_view tag(entry.tag, entry.tagLen > 0 ? entry.tagLen - 1 : 0);
 
     // Check if tag is in the Module list
     bool is_module = std::binary_search(kModuleTags.begin(), kModuleTags.end(), tag);
+    const bool module_message = tag == "VectorContext"sv || tag == "VectorLegacyBridge"sv;
+    if (capture_level == 1 &&
+        entry.priority < (module_message ? ANDROID_LOG_WARN : ANDROID_LOG_INFO)) return;
     if (is_module) {
         modules_written_ += FastWrite(entry, modules_fd_);
     }
@@ -187,31 +213,17 @@ void Logcat::ProcessBuffer(struct log_msg* buf) {
     bool match_exact = std::binary_search(kExactTags.begin(), kExactTags.end(), tag);
     bool match_prefix = std::any_of(kPrefixTags.begin(), kPrefixTags.end(),
                                     [&](auto p) { return tag.starts_with(p); });
-    if (verbose_enabled_ && (entry.pid == my_pid_ || is_module || buf->id() == LOG_ID_CRASH ||
-                             match_exact || match_prefix)) {
+    if (entry.pid == my_pid_ || is_module || buf->id() == LOG_ID_CRASH ||
+        match_exact || match_prefix) {
         verbose_written_ += FastWrite(entry, verbose_fd_);
     }
 
-    // Feedback Loop: The daemon listens to its own Logcat output for remote commands.
-    if (entry.pid == my_pid_ && tag == "VectorLogcat"sv) {
-        std::string_view msg(entry.message, entry.messageLen);
-        if (msg == "!!start_verbose!!"sv) {
-            verbose_enabled_ = true;
-            verbose_written_ += FastWrite(entry, verbose_fd_);
-        } else if (msg == "!!stop_verbose!!"sv) {
-            verbose_enabled_ = false;
-        } else if (msg == "!!refresh_modules!!"sv) {
-            RefreshFd(false);
-        } else if (msg == "!!refresh_verbose!!"sv) {
-            RefreshFd(true);
-        }
-    }
+    if (modules_written_ >= kMaxLogSize) RefreshFd(false);
+    if (verbose_written_ >= kMaxLogSize) RefreshFd(true);
 }
 
 void Logcat::Run() {
     size_t tail = 0;  // Start with no history
-    RefreshFd(true);
-    RefreshFd(false);
 
     while (true) {
         // tail=10 on reconnect ensures that if the logger crashes, we resume with the last 10 lines
@@ -230,12 +242,6 @@ void Logcat::Run() {
         // This blocks while waiting for new logs from the logd Unix Socket
         while (android_logger_list_read(list, &msg) > 0) {
             ProcessBuffer(&msg);
-
-            // Check for rotation triggers
-            if (modules_written_ >= kMaxLogSize) [[unlikely]]
-                RefreshFd(false);
-            if (verbose_written_ >= kMaxLogSize) [[unlikely]]
-                RefreshFd(true);
         }
 
         android_logger_list_free(list);
@@ -254,5 +260,28 @@ Java_org_matrix_vector_daemon_env_LogcatMonitor_runLogcat(JNIEnv* env, jobject t
         return;
     }
     Logcat daemon(env, thiz, method);
+    {
+        std::lock_guard lock(capture_mutex);
+        active_logcat = &daemon;
+    }
     daemon.Run();
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_org_matrix_vector_daemon_env_LogcatMonitor_configureNative(JNIEnv* env, jobject thiz, jint level) {
+    std::lock_guard lock(capture_mutex);
+    capture_level = level;
+    // Close descriptors synchronously: after Off returns no reader can append another line.
+    if (active_logcat) active_logcat->CloseFiles();
+    auto clazz = env->GetObjectClass(thiz);
+    auto clear = env->GetMethodID(clazz, "clearFds", "()V");
+    if (clear) env->CallVoidMethod(thiz, clear);
+    env->DeleteLocalRef(clazz);
+    refresh_mask = level == 0 ? 0 : 3;
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_org_matrix_vector_daemon_env_LogcatMonitor_refreshNative(JNIEnv*, jobject, jboolean verbose) {
+    std::lock_guard lock(capture_mutex);
+    if (capture_level != 0) refresh_mask |= verbose ? 2 : 1;
 }

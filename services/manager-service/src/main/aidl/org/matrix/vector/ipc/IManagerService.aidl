@@ -395,23 +395,10 @@ interface IManagerService {
      */
     void setStatusNotificationEnabled(boolean enabled);
 
-    /**
-     * Whether the daemon is capturing the verbose log. True on a device where nobody has said
-     * otherwise.
-     *
-     * <p>The stored value, not the value or'd with the build type. It used to be the latter, which
-     * made the setting unwritable on a debug daemon: the manager could never read false, so its
-     * switch snapped back on every tap and had to be greyed out.</p>
-     */
+    /** Legacy API: true only in Detailed mode, false by default. */
     boolean isVerboseLogEnabled();
 
-    /**
-     * Sets that, and asks the daemon's log reader to start or stop capturing to match.
-     *
-     * <p>The reader acts on a sentinel written into the log rather than on this call returning, so
-     * capture is not yet in step when this comes back. What is already written stays written; only
-     * what is captured from here on changes.</p>
-     */
+    /** Legacy API: true selects Detailed; false selects Off. Existing records are retained. */
     void setVerboseLogEnabled(boolean enabled);
 
     // ---- logs -------------------------------------------------------------------------------------
@@ -799,4 +786,7 @@ interface IManagerService {
 
     /** APatch. */
     const int ROOT_APATCH = 5;
+    /** Capture policy: 0 = Off (default), 1 = Basic, 2 = Detailed. */
+    int getLogLevel();
+    void setLogLevel(int level);
 }

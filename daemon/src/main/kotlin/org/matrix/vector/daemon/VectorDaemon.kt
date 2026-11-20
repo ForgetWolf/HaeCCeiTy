@@ -13,7 +13,6 @@ import android.os.Process
 import android.os.ServiceManager
 import android.os.SystemProperties
 import android.system.Os
-import android.util.Log
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +29,7 @@ import org.matrix.vector.daemon.ipc.BRIDGE_TRANSACTION_CODE
 import org.matrix.vector.daemon.ipc.ManagerService
 import org.matrix.vector.daemon.ipc.SystemServerService
 import org.matrix.vector.daemon.utils.applyNotificationWorkaround
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorDaemon"
 private const val ACTION_SEND_BINDER = 1
@@ -82,6 +82,12 @@ object VectorDaemon {
   @JvmStatic
   fun main(args: Array<String>) {
     if (!FileSystem.tryLock()) kotlin.system.exitProcess(0)
+    // Publish Off before opening the database; startup errors must also honour silence.
+    SystemProperties.set("log.tag.HraELL.Silent", "S")
+    SystemProperties.set(org.matrix.vector.logging.LogPolicy.PROPERTY, "S")
+    // Open preferences while root, before sendToBridge changes the main thread's euid.
+    val logLevel = org.matrix.vector.daemon.data.PreferenceStore.getLogLevel()
+    LogcatMonitor.configure(logLevel)
 
     // `activity` is system_server's own, registered long after the specialization in which the
     // module comes looking for us, so at boot nothing answers it and a binder there means someone
@@ -133,19 +139,8 @@ object VectorDaemon {
 
     applyNotificationWorkaround()
 
-    // Read this before `sendToBridge`, which leaves the main thread at euid 1000: the config
-    // database lives under a directory only root can enter, so the first process to open it has
-    // to do so while we still have root. On a successful injection a binder thread opens it for
-    // us during specialization, but when the injection fails nothing else has, and the daemon
-    // used to die here on an unreadable preference.
-    val isVerboseLog = ManagerService.isVerboseLogEnabled()
-
     // Setup IPC channel for applications by injecting DaemonService binder
     sendToBridge(VectorService.asBinder(), false)
-
-    if (!isVerboseLog) {
-      LogcatMonitor.stopVerbose()
-    }
 
     Looper.loop()
     throw RuntimeException("Main thread loop unexpectedly exited")

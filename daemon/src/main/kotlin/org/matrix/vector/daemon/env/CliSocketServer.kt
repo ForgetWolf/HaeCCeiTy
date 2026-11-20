@@ -4,7 +4,6 @@ import android.net.LocalServerSocket
 import android.net.LocalSocket
 import android.net.LocalSocketAddress
 import android.system.Os
-import android.util.Log
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.File
@@ -14,6 +13,7 @@ import kotlinx.coroutines.launch
 import org.matrix.vector.daemon.*
 import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.daemon.ipc.CliHandler
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorCliSever"
 

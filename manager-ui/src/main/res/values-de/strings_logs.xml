@@ -84,4 +84,18 @@
     <string name="logs_clear_confirm">Leeren</string>
     <string name="logs_clear_done">Das Protokoll wurde geleert</string>
     <string name="logs_clear_unreachable">Das Protokoll konnte nicht geleert werden</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Protokollierungsstufe</string>
+    <string name="logs_capture_off">Aus</string>
+    <string name="logs_capture_basic">Einfach</string>
+    <string name="logs_capture_detailed">Detailliert</string>
+    <string name="logs_capture_off_summary">Beendet neue Framework- und Managerprotokolle, einschließlich Absturzberichten. Vorhandene Protokolle bleiben erhalten.</string>
+    <string name="logs_capture_basic_summary">Zeichnet Start- und Ladeergebnisse, Warnungen und Fehler auf.</string>
+    <string name="logs_capture_detailed_summary">Zeichnet zusätzlich Modulmeldungen und Debugging-Details auf.</string>
+    <string name="logs_capture_failed">Die Protokollierungsstufe konnte nicht gelesen oder geändert werden. Öffne die Einstellungen erneut oder versuche es noch einmal.</string>
+    <string name="logs_capture_unknown_summary">Die aktuelle Protokollierungsstufe ist noch nicht verfügbar.</string>
+    <string name="logs_filter_writers">App</string>
+    <string name="logs_filter_none">Keine weiteren Filter verfügbar</string>
+    <string name="logs_filter_clear_writer">App-Filter zurücksetzen</string>
 </resources>

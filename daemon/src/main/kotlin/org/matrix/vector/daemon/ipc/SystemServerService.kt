@@ -7,10 +7,10 @@ import android.os.IClientCallback
 import android.os.IServiceCallback
 import android.os.Parcel
 import android.os.ServiceManager
-import android.util.Log
 import org.matrix.vector.ipc.IFrameworkService
 import org.matrix.vector.daemon.*
 import org.matrix.vector.daemon.system.getSystemServiceManager
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorSystemServer"
 

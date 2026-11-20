@@ -1,7 +1,6 @@
 package org.matrix.vector.ui.logs
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlin.math.max
@@ -18,6 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "LogsViewModel"
 
@@ -158,6 +158,15 @@ class LogsViewModel(private val source: LogSource) : ViewModel() {
     private val _saveState = MutableStateFlow<LogSaveState>(LogSaveState.Idle)
     val saveState: StateFlow<LogSaveState> = _saveState.asStateFlow()
 
+    private val logLevelMutex = Mutex()
+    private val _captureMode = MutableStateFlow<LogCaptureMode?>(null)
+    val captureMode = _captureMode.asStateFlow()
+    private val _logLevelBusy = MutableStateFlow(true)
+    val logLevelBusy = _logLevelBusy.asStateFlow()
+    private val _logLevelFailed = MutableStateFlow(false)
+    val logLevelFailed = _logLevelFailed.asStateFlow()
+    val canConfigureLogLevel = source.canConfigureLogLevel
+
     private val _verboseEnabled = MutableStateFlow(false)
     val verboseEnabled: StateFlow<Boolean> = _verboseEnabled.asStateFlow()
 
@@ -189,7 +198,20 @@ class LogsViewModel(private val source: LogSource) : ViewModel() {
     val resetKind: LogResetKind? = source.resetKind
 
     init {
-        if (source.canConfigureVerbose) {
+        if (source.canConfigureLogLevel) {
+            viewModelScope.launch {
+                logLevelMutex.withLock {
+                    try {
+                        _captureMode.value = source.getLogLevel()
+                    } catch (e: Exception) {
+                        if (e is kotlinx.coroutines.CancellationException) throw e
+                        _logLevelFailed.value = true
+                    } finally {
+                        _logLevelBusy.value = false
+                    }
+                }
+            }
+        } else if (source.canConfigureVerbose) {
             viewModelScope.launch { _verboseEnabled.value = source.isVerboseEnabled() }
         }
     }
@@ -619,6 +641,29 @@ class LogsViewModel(private val source: LogSource) : ViewModel() {
 
     fun consumeSaveState() {
         _saveState.value = LogSaveState.Idle
+    }
+
+    fun setLogLevel(mode: LogCaptureMode) {
+        if (_logLevelBusy.value || _captureMode.value == mode) return
+        _logLevelBusy.value = true
+        viewModelScope.launch {
+            logLevelMutex.withLock {
+                try {
+                    val actual = source.setLogLevel(mode)
+                    _captureMode.value = actual
+                    _logLevelFailed.value = actual != mode
+                    refresh(LogTab.MODULES)
+                    refresh(LogTab.VERBOSE)
+                } catch (e: Exception) {
+                    if (e is kotlinx.coroutines.CancellationException) throw e
+                    // A failed binder call must never make the UI claim logging is off.
+                    _captureMode.value = runCatching { source.getLogLevel() }.getOrNull()
+                    _logLevelFailed.value = true
+                } finally {
+                    _logLevelBusy.value = false
+                }
+            }
+        }
     }
 
     fun setVerbose(enabled: Boolean) {

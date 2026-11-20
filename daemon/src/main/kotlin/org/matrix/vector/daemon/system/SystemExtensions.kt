@@ -12,11 +12,11 @@ import android.content.pm.ResolveInfo
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IUserManager
-import android.util.Log
 import java.io.File
 import java.lang.reflect.Method
 import java.util.stream.Collectors
 import org.matrix.vector.daemon.utils.getRealUsers
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorSystem"
 const val PER_USER_RANGE = 100000

@@ -17,6 +17,7 @@ android {
 }
 
 dependencies {
+    api(projects.services.managerService)
     compileOnly(libs.androidx.annotation)
     compileOnly(libs.libxposed.annotation)
     compileOnly(projects.hiddenapi.stubs)

@@ -1,6 +1,5 @@
 package org.matrix.vector.manager.data.repository
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -12,6 +11,7 @@ import org.matrix.vector.manager.logW
 import org.matrix.vector.ui.store.RepoVersion
 import org.matrix.vector.ui.store.StoreLog
 import org.matrix.vector.ui.store.StoreRepository
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * The Store's data for Vector: [StoreRepository], with the daemon as what knows the device.

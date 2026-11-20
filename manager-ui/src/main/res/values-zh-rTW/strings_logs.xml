@@ -81,4 +81,18 @@
     <string name="logs_clear_confirm">清空</string>
     <string name="logs_clear_done">日誌已清空</string>
     <string name="logs_clear_unreachable">無法清空日誌</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">日誌等級</string>
+    <string name="logs_capture_off">關閉</string>
+    <string name="logs_capture_basic">基本</string>
+    <string name="logs_capture_detailed">詳細</string>
+    <string name="logs_capture_off_summary">停止新增框架與管理器日誌，包括崩潰記錄。保留既有日誌。</string>
+    <string name="logs_capture_basic_summary">記錄啟動與載入結果、警告和錯誤。</string>
+    <string name="logs_capture_detailed_summary">額外記錄模組訊息和偵錯細節。</string>
+    <string name="logs_capture_failed">無法讀取或變更日誌等級，請重新開啟設定或重試。</string>
+    <string name="logs_capture_unknown_summary">尚未讀取到目前的日誌等級。</string>
+    <string name="logs_filter_writers">應用程式</string>
+    <string name="logs_filter_none">沒有更多可用的篩選條件</string>
+    <string name="logs_filter_clear_writer">清除應用程式篩選</string>
 </resources>

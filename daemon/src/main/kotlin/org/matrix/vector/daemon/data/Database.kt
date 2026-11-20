@@ -3,9 +3,9 @@ package org.matrix.vector.daemon.data
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import java.io.File
 import org.matrix.vector.daemon.utils.FakeContext
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorDatabase"
 private const val DB_VERSION = 5

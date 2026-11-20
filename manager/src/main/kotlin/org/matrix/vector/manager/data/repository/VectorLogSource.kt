@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import org.matrix.vector.manager.data.log.LogFile
 import org.matrix.vector.manager.data.log.logArchiveName
 import org.matrix.vector.manager.di.ServiceLocator
+import org.matrix.vector.ui.logs.LogCaptureMode
 import org.matrix.vector.ui.logs.LogContent
 import org.matrix.vector.ui.logs.LogResetKind
 import org.matrix.vector.ui.logs.LogSource
@@ -38,6 +39,24 @@ class VectorLogSource : LogSource {
         val result =
             if (part == null) daemon.getLiveLogPart(verbose) else daemon.getLogPart(verbose, part)
         return result.map { pfd -> pfd?.let { LogFile(it) } }
+    }
+
+    override val canConfigureLogLevel: Boolean = true
+
+    override suspend fun getLogLevel(): LogCaptureMode =
+        when (daemon.getLogLevel().getOrThrow()) {
+            1 -> LogCaptureMode.BASIC
+            2 -> LogCaptureMode.DETAILED
+            else -> LogCaptureMode.OFF
+        }
+
+    override suspend fun setLogLevel(mode: LogCaptureMode): LogCaptureMode {
+        daemon.setLogLevel(when (mode) {
+            LogCaptureMode.OFF -> 0
+            LogCaptureMode.BASIC -> 1
+            LogCaptureMode.DETAILED -> 2
+        }).getOrThrow()
+        return getLogLevel()
     }
 
     override val canConfigureVerbose: Boolean = true

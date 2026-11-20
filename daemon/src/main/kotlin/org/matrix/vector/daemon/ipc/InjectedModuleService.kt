@@ -4,7 +4,6 @@ import android.os.Binder
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.os.RemoteException
-import android.util.Log
 import io.github.libxposed.service.IXposedService
 import java.io.Serializable
 import java.util.concurrent.ConcurrentHashMap
@@ -14,6 +13,7 @@ import org.matrix.vector.daemon.data.ConfigCache
 import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.daemon.data.PreferenceStore
 import org.matrix.vector.daemon.system.PER_USER_RANGE
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorInjectedModuleService"
 

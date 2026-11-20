@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.services.managerService)
     implementation(libs.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.dnsoverhttps)

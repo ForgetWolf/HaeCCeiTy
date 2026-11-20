@@ -1,6 +1,5 @@
 package org.matrix.vector.ui.store
 
-import android.util.Log
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +15,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.withContext
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * Where the Store's shared code reports, as a `Log` priority; each app routes it to its own log.

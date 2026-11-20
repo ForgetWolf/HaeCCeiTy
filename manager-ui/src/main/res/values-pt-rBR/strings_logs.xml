@@ -84,4 +84,18 @@
     <string name="logs_clear_confirm">Limpar</string>
     <string name="logs_clear_done">O registro foi limpo</string>
     <string name="logs_clear_unreachable">Não foi possível limpar o registro</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Nível de registro</string>
+    <string name="logs_capture_off">Desativado</string>
+    <string name="logs_capture_basic">Básico</string>
+    <string name="logs_capture_detailed">Detalhado</string>
+    <string name="logs_capture_off_summary">Interrompe novos registros do framework e do gerenciador, incluindo relatórios de falhas. Os registros existentes são mantidos.</string>
+    <string name="logs_capture_basic_summary">Registra resultados de inicialização e carregamento, avisos e erros.</string>
+    <string name="logs_capture_detailed_summary">Também registra mensagens dos módulos e detalhes de depuração.</string>
+    <string name="logs_capture_failed">Não foi possível ler ou alterar o nível de registro. Reabra as configurações ou tente novamente.</string>
+    <string name="logs_capture_unknown_summary">O nível de registro atual ainda não está disponível.</string>
+    <string name="logs_filter_writers">Aplicativo</string>
+    <string name="logs_filter_none">Não há mais opções para filtrar</string>
+    <string name="logs_filter_clear_writer">Limpar filtro de aplicativo</string>
 </resources>

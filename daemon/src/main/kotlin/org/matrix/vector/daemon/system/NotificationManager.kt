@@ -16,13 +16,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import io.github.libxposed.service.IXposedScopeCallback
 import java.util.UUID
 import org.matrix.vector.daemon.BuildConfig
 import org.matrix.vector.daemon.R
 import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.daemon.utils.FakeContext
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorNotificationManager"
 private const val STATUS_CHANNEL_ID = "vector_status"

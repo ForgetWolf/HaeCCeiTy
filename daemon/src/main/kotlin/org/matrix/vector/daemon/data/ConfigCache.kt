@@ -3,7 +3,6 @@ package org.matrix.vector.daemon.data
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageParser
 import android.system.Os
-import android.util.Log
 import hidden.HiddenApiBridge
 import java.io.File
 import java.nio.file.Files
@@ -23,6 +22,7 @@ import org.matrix.vector.daemon.system.*
 import org.matrix.vector.daemon.utils.InstallerVerifier
 import org.matrix.vector.daemon.utils.applySqliteHelperWorkaround
 import org.matrix.vector.daemon.utils.getRealUsers
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorConfigCache"
 

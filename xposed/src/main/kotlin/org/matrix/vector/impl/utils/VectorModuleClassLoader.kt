@@ -5,7 +5,6 @@ import android.os.SharedMemory
 import android.system.ErrnoException
 import android.system.Os
 import android.system.OsConstants
-import android.util.Log
 import androidx.annotation.RequiresApi
 import hidden.ByteBufferDexClassLoader
 import java.io.File
@@ -18,6 +17,7 @@ import java.util.jar.JarFile
 import java.util.stream.Collectors
 import java.util.zip.ZipEntry
 import org.matrix.vector.nativebridge.HookBridge
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * Custom ClassLoader for module execution. Utilizes in-memory DEX loading to prevent the need to

@@ -2,9 +2,9 @@ package org.matrix.vector.daemon.data
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import org.matrix.vector.ipc.ScopeEntry
 import org.matrix.vector.daemon.system.NotificationManager
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorModuleDatabase"
 

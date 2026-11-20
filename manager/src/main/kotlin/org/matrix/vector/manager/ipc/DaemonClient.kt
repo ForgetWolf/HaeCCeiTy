@@ -215,6 +215,10 @@ class DaemonClient(private val serviceState: StateFlow<IManagerService?>) {
         it.setStatusNotificationEnabled(enabled)
     }
 
+    suspend fun getLogLevel(): Result<Int> = runIpc { it.logLevel }
+
+    suspend fun setLogLevel(level: Int): Result<Unit> = runIpc { it.setLogLevel(level) }
+
     suspend fun isVerboseLogEnabled(): Result<Boolean> = runIpc { it.isVerboseLogEnabled }
 
     suspend fun setVerboseLogEnabled(enabled: Boolean): Result<Unit> = runIpc { it.setVerboseLogEnabled(enabled)

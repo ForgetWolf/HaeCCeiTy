@@ -1,11 +1,11 @@
 package org.matrix.vector.daemon.utils
 
-import android.util.Log
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 import org.matrix.vector.ipc.IFrameworkInstallReceiver
 import org.matrix.vector.ipc.IManagerService
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorRootInstaller"
 

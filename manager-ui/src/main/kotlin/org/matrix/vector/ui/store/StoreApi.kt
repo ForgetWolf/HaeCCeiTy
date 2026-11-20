@@ -1,6 +1,5 @@
 package org.matrix.vector.ui.store
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -14,6 +13,7 @@ import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * The module repository's two hosts, and how one catalogue is made of them.

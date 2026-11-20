@@ -89,4 +89,18 @@
     <string name="logs_clear_confirm">Очистити</string>
     <string name="logs_clear_done">Журнал очищено</string>
     <string name="logs_clear_unreachable">Не вдалося очистити журнал</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Рівень журналювання</string>
+    <string name="logs_capture_off">Вимкнено</string>
+    <string name="logs_capture_basic">Базовий</string>
+    <string name="logs_capture_detailed">Докладний</string>
+    <string name="logs_capture_off_summary">Припиняє запис нових журналів фреймворку й менеджера, зокрема звітів про збої. Наявні журнали зберігаються.</string>
+    <string name="logs_capture_basic_summary">Записує результати запуску й завантаження, попередження та помилки.</string>
+    <string name="logs_capture_detailed_summary">Також записує повідомлення модулів і відомості для налагодження.</string>
+    <string name="logs_capture_failed">Не вдалося прочитати або змінити рівень журналювання. Відкрийте налаштування знову або повторіть спробу.</string>
+    <string name="logs_capture_unknown_summary">Поточний рівень журналювання ще недоступний.</string>
+    <string name="logs_filter_writers">Застосунок</string>
+    <string name="logs_filter_none">Більше немає варіантів для фільтрування</string>
+    <string name="logs_filter_clear_writer">Скинути фільтр застосунків</string>
 </resources>

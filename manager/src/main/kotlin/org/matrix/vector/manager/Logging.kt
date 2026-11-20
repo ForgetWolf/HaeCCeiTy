@@ -1,8 +1,8 @@
 package org.matrix.vector.manager
 
-import android.util.Log
 import java.io.PrintWriter
 import java.io.StringWriter
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * The manager's logging, which exists because the platform's own quietly loses stack traces.
@@ -75,6 +75,7 @@ fun stackTraceOf(tr: Throwable): String =
  * deep ones — would otherwise lose its tail, which is where the frames that name our own code live.
  */
 private fun emit(priority: Int, msg: String, tr: Throwable?) {
+    if (!org.matrix.vector.logging.LogPolicy.allows(priority, Constants.TAG)) return
     val text = if (tr == null) msg else "$msg\n${stackTraceOf(tr)}"
     if (text.length <= PAYLOAD_LIMIT) {
         Log.println(priority, Constants.TAG, text)

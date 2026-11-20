@@ -91,11 +91,23 @@ object PreferenceStore {
   fun setStatusNotification(enabled: Boolean) =
       updateModulePref("lspd", 0, "config", "enable_status_notification", enabled)
 
-  fun isVerboseLogEnabled(): Boolean =
-      getModulePrefs("lspd", 0, "config")["enable_verbose_log"] as? Boolean ?: false
+  fun getLogLevel(): Int {
+    val prefs = getModulePrefs("lspd", 0, "config")
+    val level = prefs["log_level"] as? Int
+    if (level != null) return level.takeIf { it in 0..2 } ?: 0
+    // Preserve an explicit old Detailed preference; absent/false defaults to Off.
+    return if (prefs["enable_verbose_log"] == true) 2 else 0
+  }
 
-  fun setVerboseLog(enabled: Boolean) =
-      updateModulePref("lspd", 0, "config", "enable_verbose_log", enabled)
+  fun setLogLevel(level: Int) {
+    require(level in 0..2)
+    updateModulePrefs("lspd", 0, "config",
+        mapOf("log_level" to level, "enable_verbose_log" to (level == 2)))
+  }
+
+  fun isVerboseLogEnabled(): Boolean = getLogLevel() == 2
+
+  fun setVerboseLog(enabled: Boolean) = setLogLevel(if (enabled) 2 else 0)
 
   fun isScopeRequestBlocked(pkg: String): Boolean =
       (getModulePrefs("lspd", 0, "config")["scope_request_blocked"] as? Set<*>)?.contains(pkg) ==

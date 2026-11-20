@@ -1,6 +1,5 @@
 package org.matrix.vector.ui.net
 
-import android.util.Log
 import java.net.InetAddress
 import java.net.Proxy
 import java.net.ProxySelector
@@ -12,6 +11,7 @@ import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.dnsoverhttps.DnsOverHttps
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorDns"
 

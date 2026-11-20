@@ -5,7 +5,6 @@ import android.os.Parcel
 import android.os.ParcelFileDescriptor
 import android.os.Process
 import android.os.RemoteException
-import android.util.Log
 import io.github.libxposed.service.HookedProcess
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
@@ -19,6 +18,7 @@ import org.matrix.vector.daemon.system.FIRST_APPLICATION_UID
 import org.matrix.vector.daemon.system.PER_USER_RANGE
 import org.matrix.vector.daemon.utils.InstallerVerifier
 import org.matrix.vector.daemon.utils.ObfuscationManager
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorFrameworkService"
 

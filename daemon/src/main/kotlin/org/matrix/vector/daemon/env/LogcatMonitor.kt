@@ -7,15 +7,16 @@ import android.os.Process
 import android.os.SELinux
 import android.os.SystemProperties
 import android.system.Os
-import android.util.Log
 import java.io.File
 import java.io.FileDescriptor
 import java.nio.file.Files
 import java.nio.file.LinkOption
 import java.nio.file.Paths
 import kotlinx.coroutines.launch
+import org.matrix.vector.logging.LogPolicy
 import org.matrix.vector.daemon.VectorDaemon
 import org.matrix.vector.daemon.data.FileSystem
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorLogcat"
 private const val FD_MODE =
@@ -25,11 +26,31 @@ private const val FD_MODE =
         ParcelFileDescriptor.MODE_APPEND
 
 object LogcatMonitor {
-  private var modulesFd = -1
-  private var verboseFd = -1
+  @Volatile private var modulesFd = -1
+  @Volatile private var verboseFd = -1
   @Volatile private var isRunning = false
+  private val dumpProcesses = mutableListOf<java.lang.Process>()
 
   private external fun runLogcat()
+  private external fun configureNative(level: Int)
+  private external fun refreshNative(verbose: Boolean)
+
+  @Synchronized
+  fun configure(level: Int) {
+    require(level in 0..2)
+    val wasDetailed = LogPolicy.getLevel() == LogPolicy.DETAILED
+    SystemProperties.set(LogPolicy.PROPERTY, when (level) {
+      LogPolicy.DETAILED -> "V"
+      LogPolicy.BASIC -> "D"
+      else -> "S"
+    })
+    configureNative(level)
+    if (level != LogPolicy.DETAILED) {
+      dumpProcesses.forEach { process -> runCatching { process.destroyForcibly().waitFor() } }
+      dumpProcesses.clear()
+    }
+    if (level == LogPolicy.DETAILED && !wasDetailed) dumpPropsAndDmesg()
+  }
 
   // Thread-safe LRU implementation for log files
   private class ThreadSafeLRU(private val maxEntries: Int = 10) {
@@ -58,8 +79,6 @@ object LogcatMonitor {
     if (SystemProperties.getInt("persist.sys.log_reject_level", 0) > 0) {
       SystemProperties.set("persist.sys.log_reject_level", "0")
     }
-
-    dumpPropsAndDmesg()
   }
 
   @SuppressLint("UnsafeDynamicallyLoadedCode")
@@ -70,23 +89,30 @@ object LogcatMonitor {
     System.load("$classPath!/lib/$abi/${System.mapLibraryName("daemon")}")
   }
 
+  @Suppress("unused") // Called while the native collector holds its capture mutex.
+  private fun clearFds() {
+    modulesFd = -1
+    verboseFd = -1
+  }
+
   private fun dumpPropsAndDmesg() {
     VectorDaemon.scope.launch {
-      // Filter privacy props by temporarily assuming an untrusted context
-      runCatching {
-            SELinux.setFSCreateContext("u:object_r:app_data_file:s0")
-            ProcessBuilder(
-                    "sh",
-                    "-c",
-                    "echo -n u:r:untrusted_app:s0 > /proc/thread-self/attr/current; getprop")
-                .redirectOutput(FileSystem.getPropsPath()) // Ensure this exists in FileSystem
-                .start()
-          }
-          .onFailure { Log.e(TAG, "getprop failed", it) }
-          .also { SELinux.setFSCreateContext(null) }
-
-      runCatching { ProcessBuilder("dmesg").redirectOutput(FileSystem.getKmsgPath()).start() }
-          .onFailure { Log.e(TAG, "dmesg failed", it) }
+      synchronized(this@LogcatMonitor) {
+        if (LogPolicy.getLevel() != LogPolicy.DETAILED) return@synchronized
+        dumpProcesses.removeAll { !it.isAlive }
+        // Keep handles so switching away from Detailed also stops in-flight dumps.
+        runCatching {
+          SELinux.setFSCreateContext("u:object_r:app_data_file:s0")
+          ProcessBuilder("sh", "-c",
+              "echo -n u:r:untrusted_app:s0 > /proc/thread-self/attr/current; getprop")
+              .redirectOutput(FileSystem.getPropsPath()).start().also { dumpProcesses.add(it) }
+        }.onFailure { Log.e(TAG, "getprop failed", it) }
+            .also { SELinux.setFSCreateContext(null) }
+        runCatching {
+          ProcessBuilder("dmesg").redirectOutput(FileSystem.getKmsgPath())
+              .start().also { dumpProcesses.add(it) }
+        }.onFailure { Log.e(TAG, "dmesg failed", it) }
+      }
     }
   }
 
@@ -136,21 +162,17 @@ object LogcatMonitor {
         .onFailure { Log.w(TAG, "checkFd failed for $fd", it) }
   }
 
-  fun startVerbose() = Log.i(TAG, "!!start_verbose!!")
-
-  fun stopVerbose() = Log.i(TAG, "!!stop_verbose!!")
-
-  fun refresh(isVerboseLog: Boolean) {
-    Log.i(TAG, if (isVerboseLog) "!!refresh_verbose!!" else "!!refresh_modules!!")
-  }
+  fun refresh(isVerboseLog: Boolean) = refreshNative(isVerboseLog)
 
   fun checkLogFile() {
+    if (LogPolicy.getLevel() == LogPolicy.OFF) return
     if (modulesFd == -1) refresh(false)
     if (verboseFd == -1) refresh(true)
   }
 
   @Suppress("unused") // Called via JNI
   private fun refreshFd(isVerboseLog: Boolean): Int {
+    if (LogPolicy.getLevel() == LogPolicy.OFF) return -1
     return runCatching {
           val logFile =
               if (isVerboseLog) {

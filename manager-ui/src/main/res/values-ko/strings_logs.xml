@@ -81,4 +81,18 @@
     <string name="logs_clear_confirm">지우기</string>
     <string name="logs_clear_done">로그를 지웠습니다</string>
     <string name="logs_clear_unreachable">로그를 지우지 못했습니다</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">로그 수준</string>
+    <string name="logs_capture_off">끄기</string>
+    <string name="logs_capture_basic">기본</string>
+    <string name="logs_capture_detailed">상세</string>
+    <string name="logs_capture_off_summary">비정상 종료 기록을 포함하여 프레임워크와 관리자의 새 로그 기록을 중지합니다. 기존 로그는 유지됩니다.</string>
+    <string name="logs_capture_basic_summary">시작 및 로드 결과, 경고와 오류를 기록합니다.</string>
+    <string name="logs_capture_detailed_summary">모듈 메시지와 디버깅 세부 정보도 기록합니다.</string>
+    <string name="logs_capture_failed">로그 수준을 읽거나 변경할 수 없습니다. 설정을 다시 열거나 다시 시도하세요.</string>
+    <string name="logs_capture_unknown_summary">현재 로그 수준을 아직 확인할 수 없습니다.</string>
+    <string name="logs_filter_writers">앱</string>
+    <string name="logs_filter_none">더 이상 필터링할 항목이 없습니다</string>
+    <string name="logs_filter_clear_writer">앱 필터 지우기</string>
 </resources>

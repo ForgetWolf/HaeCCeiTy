@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(dex2oat)
 
+include_directories(${VECTOR_ROOT}/native/include)
+
 add_executable(dex2oat dex2oat.cpp)
 add_library(oat_hook SHARED oat_hook.cpp)
 

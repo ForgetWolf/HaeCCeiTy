@@ -3,7 +3,7 @@ package de.robv.android.xposed;
 import android.app.ActivityThread;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.util.Log;
+import org.matrix.vector.util.Log;
 
 import org.matrix.vector.util.Utils;
 import org.matrix.vector.impl.hooks.VectorNativeHooker;
@@ -138,10 +138,7 @@ public final class XposedBridge {
      * @param t The Throwable object for the stack trace.
      */
     public synchronized static void log(Throwable t) {
-        // Written out in full because this file also imports android.util.Log, and it is the
-        // framework's own that is wanted: the platform's returns an empty string for any
-        // UnknownHostException cause chain, so a module logging a failed request landed an empty
-        // line in the modules log.
+        // Preserve the full trace, including UnknownHostException causes.
         String logStr = org.matrix.vector.util.Log.getStackTraceString(t);
         Log.e(TAG, logStr);
     }

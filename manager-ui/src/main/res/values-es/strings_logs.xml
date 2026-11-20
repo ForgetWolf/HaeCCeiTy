@@ -84,4 +84,18 @@
     <string name="logs_clear_confirm">Vaciar</string>
     <string name="logs_clear_done">El registro se ha vaciado</string>
     <string name="logs_clear_unreachable">No se pudo vaciar el registro</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Nivel de registro</string>
+    <string name="logs_capture_off">Desactivado</string>
+    <string name="logs_capture_basic">Básico</string>
+    <string name="logs_capture_detailed">Detallado</string>
+    <string name="logs_capture_off_summary">Detiene los nuevos registros del framework y del gestor, incluidos los informes de fallos. Se conservan los registros existentes.</string>
+    <string name="logs_capture_basic_summary">Registra los resultados de inicio y carga, las advertencias y los errores.</string>
+    <string name="logs_capture_detailed_summary">También registra los mensajes de los módulos y los detalles de depuración.</string>
+    <string name="logs_capture_failed">No se pudo leer o cambiar el nivel de registro. Vuelve a abrir los ajustes o inténtalo de nuevo.</string>
+    <string name="logs_capture_unknown_summary">El nivel de registro actual aún no está disponible.</string>
+    <string name="logs_filter_writers">Aplicación</string>
+    <string name="logs_filter_none">No hay más opciones para filtrar</string>
+    <string name="logs_filter_clear_writer">Borrar filtro de aplicación</string>
 </resources>

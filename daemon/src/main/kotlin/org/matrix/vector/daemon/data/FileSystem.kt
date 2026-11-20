@@ -12,7 +12,6 @@ import android.os.SharedMemory
 import android.system.ErrnoException
 import android.system.Os
 import android.system.OsConstants
-import android.util.Log
 import hidden.HiddenApiBridge
 import java.io.File
 import java.io.FileInputStream
@@ -36,6 +35,7 @@ import kotlin.io.path.isDirectory
 import org.matrix.vector.ipc.ModuleCode
 import org.matrix.vector.daemon.BuildConfig
 import org.matrix.vector.daemon.utils.ObfuscationManager
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorFileSystem"
 
@@ -645,8 +645,10 @@ object FileSystem {
                 File("/data/data/${BuildConfig.DEFAULT_MANAGER_PACKAGE_NAME}/cache/crash"))
 
             // Gather system logs directly via shell
-            addProcOutput("full.log", "logcat", "-b", "all", "-d")
-            addProcOutput("dmesg.log", "dmesg")
+            if (org.matrix.vector.logging.LogPolicy.getLevel() == org.matrix.vector.logging.LogPolicy.DETAILED) {
+              addProcOutput("full.log", "logcat", "-b", "all", "-d")
+              addProcOutput("dmesg.log", "dmesg")
+            }
 
             // Gather system module states safely
             val magiskDataDir = File("/data/adb/modules")

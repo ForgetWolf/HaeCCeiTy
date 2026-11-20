@@ -108,4 +108,15 @@
     <string name="logs_clear_confirm">Clear</string>
     <string name="logs_clear_done">The log has been cleared</string>
     <string name="logs_clear_unreachable">Could not clear the log</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Log level</string>
+    <string name="logs_capture_off">Off</string>
+    <string name="logs_capture_basic">Basic</string>
+    <string name="logs_capture_detailed">Detailed</string>
+    <string name="logs_capture_off_summary">Stops new framework and manager logs, including crash records. Existing logs are kept.</string>
+    <string name="logs_capture_basic_summary">Records startup and loading results, warnings and errors.</string>
+    <string name="logs_capture_detailed_summary">Also records module messages and debugging details.</string>
+    <string name="logs_capture_failed">Could not read or change the log level. Reopen settings or try again.</string>
+    <string name="logs_capture_unknown_summary">The current log level is not available yet.</string>
 </resources>

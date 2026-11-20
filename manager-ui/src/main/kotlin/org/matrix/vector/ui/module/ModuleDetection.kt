@@ -2,9 +2,9 @@ package org.matrix.vector.ui.module
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.util.Log
 import java.util.Properties
 import java.util.zip.ZipFile
+import org.matrix.vector.logging.ManagedLog as Log
 
 /**
  * Everything the manager can learn about a package by looking at it.

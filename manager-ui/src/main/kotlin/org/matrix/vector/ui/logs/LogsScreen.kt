@@ -745,6 +745,9 @@ private fun LogSettingsSheet(
     onSave: () -> Unit,
     onReset: () -> Unit,
 ) {
+    val mode by viewModel.captureMode.collectAsStateWithLifecycle()
+    val busy by viewModel.logLevelBusy.collectAsStateWithLifecycle()
+    val failed by viewModel.logLevelFailed.collectAsStateWithLifecycle()
     val enabled by viewModel.verboseEnabled.collectAsStateWithLifecycle()
     val enforced by viewModel.verboseEnforced.collectAsStateWithLifecycle()
     val inlineTraces by viewModel.tracesInline.collectAsStateWithLifecycle()
@@ -761,7 +764,44 @@ private fun LogSettingsSheet(
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 8.dp),
                 )
 
-                if (viewModel.canConfigureVerbose) {
+                if (viewModel.canConfigureLogLevel) {
+                    ListItem(
+                        supportingContent = {
+                            Text(stringResource(when (mode) {
+                                LogCaptureMode.OFF -> R.string.logs_capture_off_summary
+                                LogCaptureMode.BASIC -> R.string.logs_capture_basic_summary
+                                LogCaptureMode.DETAILED -> R.string.logs_capture_detailed_summary
+                                null -> R.string.logs_capture_unknown_summary
+                            }))
+                        },
+                        leadingContent = { Icon(Icons.Rounded.Visibility, contentDescription = null) },
+                        colors = sheetRowColors,
+                    ) { Text(stringResource(R.string.logs_capture_level)) }
+                    FlowRow(
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        LogCaptureMode.entries.forEach { option ->
+                            FilterChip(
+                                selected = option == mode,
+                                enabled = !busy,
+                                onClick = { viewModel.setLogLevel(option) },
+                                label = { Text(stringResource(when (option) {
+                                    LogCaptureMode.OFF -> R.string.logs_capture_off
+                                    LogCaptureMode.BASIC -> R.string.logs_capture_basic
+                                    LogCaptureMode.DETAILED -> R.string.logs_capture_detailed
+                                })) },
+                            )
+                        }
+                    }
+                    if (failed) {
+                        Text(
+                            stringResource(R.string.logs_capture_failed),
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
+                        )
+                    }
+                } else if (viewModel.canConfigureVerbose) {
                     ListItem(
                         // Never disabled. A host that overrides the setting is a reason to *say so*,
                         // not a reason to take the control away.

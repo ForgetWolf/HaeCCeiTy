@@ -81,4 +81,18 @@
     <string name="logs_clear_confirm">Bersihkan</string>
     <string name="logs_clear_done">Log telah dibersihkan</string>
     <string name="logs_clear_unreachable">Tidak dapat membersihkan log</string>
+
+    <!-- Capture policy, independent of the log viewer severity filters. -->
+    <string name="logs_capture_level">Tingkat pencatatan</string>
+    <string name="logs_capture_off">Nonaktif</string>
+    <string name="logs_capture_basic">Dasar</string>
+    <string name="logs_capture_detailed">Terperinci</string>
+    <string name="logs_capture_off_summary">Menghentikan log baru dari framework dan pengelola, termasuk catatan kerusakan. Log yang ada tetap disimpan.</string>
+    <string name="logs_capture_basic_summary">Mencatat hasil mulai dan pemuatan, peringatan, serta kesalahan.</string>
+    <string name="logs_capture_detailed_summary">Juga mencatat pesan modul dan detail debug.</string>
+    <string name="logs_capture_failed">Tidak dapat membaca atau mengubah tingkat pencatatan. Buka kembali setelan atau coba lagi.</string>
+    <string name="logs_capture_unknown_summary">Tingkat pencatatan saat ini belum tersedia.</string>
+    <string name="logs_filter_writers">Aplikasi</string>
+    <string name="logs_filter_none">Tidak ada lagi yang dapat difilter</string>
+    <string name="logs_filter_clear_writer">Hapus filter aplikasi</string>
 </resources>

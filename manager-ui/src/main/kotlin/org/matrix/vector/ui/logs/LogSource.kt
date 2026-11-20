@@ -4,6 +4,8 @@ import android.net.Uri
 import kotlinx.coroutines.flow.StateFlow
 
 /** Whether a host's destructive reset opens a fresh part or empties the buffer, or has neither. */
+enum class LogCaptureMode { OFF, BASIC, DETAILED }
+
 enum class LogResetKind {
     /** A non-destructive rotation: a new part opens and the old one stays reachable on disk. */
     ROTATE,
@@ -76,6 +78,16 @@ interface LogSource {
 
     /** Writes the preference and returns the value the host reports afterwards. */
     suspend fun setVerboseEnabled(enabled: Boolean): Boolean
+
+    /** Hosts with a true three-level capture policy opt in; legacy hosts keep their switch. */
+    val canConfigureLogLevel: Boolean get() = false
+    suspend fun getLogLevel(): LogCaptureMode =
+        if (isVerboseEnabled()) LogCaptureMode.DETAILED else LogCaptureMode.OFF
+    suspend fun setLogLevel(mode: LogCaptureMode): LogCaptureMode {
+        require(mode != LogCaptureMode.BASIC)
+        return if (setVerboseEnabled(mode == LogCaptureMode.DETAILED))
+            LogCaptureMode.DETAILED else LogCaptureMode.OFF
+    }
 
     // --- Export --------------------------------------------------------------------------------
 

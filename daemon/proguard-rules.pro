@@ -33,6 +33,7 @@
 
 -keepclasseswithmembers class org.matrix.vector.daemon.env.LogcatMonitor {
     private int refreshFd(boolean);
+    private void clearFds();
 }
 -keepclassmembers class ** implements android.content.ContextWrapper {
     public int getUserId();

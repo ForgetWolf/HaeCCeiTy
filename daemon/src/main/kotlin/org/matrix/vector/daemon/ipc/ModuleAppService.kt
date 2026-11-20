@@ -8,7 +8,6 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.RemoteException
 import android.os.SystemClock
-import android.util.Log
 import io.github.libxposed.service.HookedProcess
 import io.github.libxposed.service.IHotReloadCallback
 import io.github.libxposed.service.IXposedScopeCallback
@@ -32,6 +31,7 @@ import org.matrix.vector.daemon.system.NotificationManager
 import org.matrix.vector.daemon.system.ProcessFreezer
 import org.matrix.vector.daemon.system.PER_USER_RANGE
 import org.matrix.vector.daemon.system.activityManager
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorModuleAppService"
 

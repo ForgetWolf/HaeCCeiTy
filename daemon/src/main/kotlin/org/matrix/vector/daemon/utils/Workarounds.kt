@@ -8,9 +8,9 @@ import android.content.Intent
 import android.content.pm.UserInfo
 import android.os.Build
 import android.os.IUserManager
-import android.util.Log
 import java.lang.ClassNotFoundException
 import org.matrix.vector.daemon.system.*
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorWorkarounds"
 private val isLenovo = Build.MANUFACTURER.equals("lenovo", ignoreCase = true)

@@ -1,7 +1,7 @@
 package org.matrix.vector.daemon.system
 
-import android.util.Log
 import java.io.File
+import org.matrix.vector.logging.ManagedLog as Log
 
 private const val TAG = "VectorFreezer"
 
