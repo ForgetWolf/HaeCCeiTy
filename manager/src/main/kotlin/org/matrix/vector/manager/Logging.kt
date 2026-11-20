@@ -26,7 +26,7 @@ import org.matrix.vector.logging.ManagedLog as Log
  *
  * The conventions the tag used to carry:
  *
- * `logcat.cpp` routes any tag beginning `Vector` into the daemon's **verbose** stream, so with
+ * `logcat.cpp` routes any tag beginning `HraELL` into the daemon's **verbose** stream, so with
  * verbose logging on everything logged here appears in the Verbose tab beside the daemon's own
  * lines and travels in the zip export — the place a reader already looks. A file-local tag would be
  * ordinary Android practice and would land nowhere; there are none in this app.

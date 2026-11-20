@@ -15,7 +15,7 @@ import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.daemon.ipc.CliHandler
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorCliSever"
+private const val TAG = "HraELLCliSever"
 
 object CliSocketServer {
 
@@ -73,7 +73,7 @@ object CliSocketServer {
       }
     }
 
-    serverThread.name = "VectorCliListener"
+    serverThread.name = "HraELLCliListener"
     serverThread.priority = Thread.MIN_PRIORITY
     serverThread.start()
   }

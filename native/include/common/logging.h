@@ -14,7 +14,7 @@
 
 /// The tag used for all log messages from this library.
 #ifndef LOG_TAG
-#define LOG_TAG "VectorNative"
+#define LOG_TAG "HraELLNative"
 #endif
 
 /**

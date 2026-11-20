@@ -17,7 +17,7 @@ object Constants {
     /**
      * The only tag the manager logs under, and it is not arbitrary.
      *
-     * `logcat.cpp` routes any tag beginning `Vector` into the daemon's **verbose** stream, so with
+     * `logcat.cpp` routes any tag beginning `HraELL` into the daemon's **verbose** stream, so with
      * verbose logging on everything logged here appears in the Verbose tab beside the daemon's own
      * lines and travels in the zip export — the place a reader already looks. A file-local tag
      * would be ordinary Android practice and would land nowhere; there are none in this app.
@@ -25,7 +25,7 @@ object Constants {
      * Nothing logs with it directly. [logE], [logW] and [logI] hold it, and the conventions for
      * what a message says and which level it says it at are documented on them.
      */
-    const val TAG = "VectorManager"
+    const val TAG = "HraELLManager"
 
     @JvmStatic
     fun setBinder(binder: IBinder): Boolean {

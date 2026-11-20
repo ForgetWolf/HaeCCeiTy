@@ -45,7 +45,7 @@ import org.matrix.vector.daemon.utils.getRealUsers
 import rikka.parcelablelist.ParcelableListSlice
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorManagerService"
+private const val TAG = "HraELLManagerService"
 
 object ManagerService : IManagerService.Stub() {
 

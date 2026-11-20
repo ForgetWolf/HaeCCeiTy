@@ -19,7 +19,7 @@ import org.matrix.vector.util.Log
 object BridgeService {
     private const val TRANSACTION_CODE =
         ('_'.code shl 24) or ('V'.code shl 16) or ('E'.code shl 8) or 'C'.code
-    private const val TAG = "VectorZygiskBridge"
+    private const val TAG = "HraELLZygiskBridge"
 
     /** Actions supported by the manual IPC bridge. */
     private enum class Action {
@@ -34,7 +34,7 @@ object BridgeService {
 
     /** Cleans up service references if the remote Vector daemon crashes. */
     private val serviceRecipient: DeathRecipient = DeathRecipient {
-        Log.e(TAG, "Vector daemin service died.")
+        Log.e(TAG, "HraELL daemin service died.")
         serviceBinder?.unlinkToDeath(this.serviceRecipient, 0)
         serviceBinder = null
         service = null
@@ -80,7 +80,7 @@ object BridgeService {
             }
             .onFailure { Log.e(TAG, "Failed to dispatch system context", it) }
 
-        Log.i(TAG, "Vector daemin service binder linked.")
+        Log.i(TAG, "HraELL daemin service binder linked.")
     }
 
     /** Handles manual parcel transactions. Called via reflection/JNI from the native hook. */

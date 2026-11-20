@@ -6,7 +6,7 @@ import org.matrix.vector.ipc.ScopeEntry
 import org.matrix.vector.daemon.system.NotificationManager
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorModuleDatabase"
+private const val TAG = "HraELLModuleDatabase"
 
 /**
  * The module configuration: what the user asked for.

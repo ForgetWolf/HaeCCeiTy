@@ -7,7 +7,7 @@ import java.io.File
 import org.matrix.vector.daemon.utils.FakeContext
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorDatabase"
+private const val TAG = "HraELLDatabase"
 private const val DB_VERSION = 5
 
 class Database(context: Context? = FakeContext()) :
@@ -22,7 +22,7 @@ class Database(context: Context? = FakeContext()) :
   }
 
   override fun onCreate(db: SQLiteDatabase) {
-    Log.i(TAG, "Creating new Vector database")
+    Log.i(TAG, "Creating new HraELL database")
     db.execSQL(
         """
         CREATE TABLE IF NOT EXISTS modules (

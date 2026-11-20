@@ -3,7 +3,7 @@ package org.matrix.vector.daemon.system
 import java.io.File
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorFreezer"
+private const val TAG = "HraELLFreezer"
 
 /**
  * Thaws a frozen process for the duration of a daemon-initiated transaction.

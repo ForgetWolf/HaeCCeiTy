@@ -140,11 +140,11 @@ class VectorModuleClassLoader : ByteBufferDexClassLoader {
     }
 
     override fun toString(): String {
-        return "VectorModuleClassLoader[module=$apkPath, ${super.toString()}]"
+        return "HraELLModuleClassLoader[module=$apkPath, ${super.toString()}]"
     }
 
     companion object {
-        private const val TAG = "VectorModuleClassLoader"
+        private const val TAG = "HraELLModuleClassLoader"
         private const val ZIP_SEPARATOR = "!/"
 
         /**

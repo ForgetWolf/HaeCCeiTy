@@ -9,7 +9,7 @@ import org.matrix.vector.ipc.IHotReloadOutcomeReceiver
 import org.matrix.vector.ipc.IProcessChannel
 import org.matrix.vector.util.Log
 
-private const val TAG = "VectorProcessChannel"
+private const val TAG = "HraELLProcessChannel"
 
 /**
  * This process's end of the only channel the daemon has for calling in.

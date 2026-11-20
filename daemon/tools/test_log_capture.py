@@ -128,7 +128,7 @@ int main() {
   assert(VectorLogLevel() == expected_level);
   for (int priority=ANDROID_LOG_VERBOSE; priority<=ANDROID_LOG_FATAL; ++priority) {
    int before = emitted;
-   VectorLogPrint(priority, "VectorTest", "test");
+   VectorLogPrint(priority, "HraELLTest", "test");
    bool expected = expected_level==2 || (expected_level==1 && priority>=ANDROID_LOG_INFO);
    assert(emitted-before == int(expected));
   }
@@ -149,25 +149,25 @@ int main() {
   Java_org_matrix_vector_daemon_env_LogcatMonitor_configureNative(&env, nullptr, level);
  };
  set(0);
- send(ANDROID_LOG_ERROR, "VectorContext");
+ send(ANDROID_LOG_ERROR, "HraELLContext");
  assert(file_opens==0 && collector.modules_fd_==-1 && collector.verbose_fd_==-1);
  set(1);
- send(ANDROID_LOG_INFO, "VectorDaemon");
+ send(ANDROID_LOG_INFO, "HraELLDaemon");
  assert(file_opens==2 && collector.verbose_written_>0 && collector.modules_written_==0);
  auto basic_size = collector.verbose_written_;
- send(ANDROID_LOG_DEBUG, "VectorDaemon");
- send(ANDROID_LOG_INFO, "VectorContext");
+ send(ANDROID_LOG_DEBUG, "HraELLDaemon");
+ send(ANDROID_LOG_INFO, "HraELLContext");
  assert(collector.verbose_written_==basic_size && collector.modules_written_==0);
- send(ANDROID_LOG_INFO, "VectorModuleManager");
+ send(ANDROID_LOG_INFO, "HraELLModuleManager");
  assert(collector.modules_written_>0); // Loading results belong to Basic.
  auto module_size = collector.modules_written_;
- send(ANDROID_LOG_ERROR, "VectorContext");
+ send(ANDROID_LOG_ERROR, "HraELLContext");
  assert(collector.modules_written_>module_size);
  set(2);
- send(ANDROID_LOG_INFO, "VectorContext");
+ send(ANDROID_LOG_INFO, "HraELLContext");
  assert(collector.modules_written_>0);
  auto detailed_size = collector.verbose_written_;
- send(ANDROID_LOG_DEBUG, "VectorDaemon");
+ send(ANDROID_LOG_DEBUG, "HraELLDaemon");
  assert(collector.verbose_written_>detailed_size);
  int closed_before = closed_count;
  set(0);
@@ -175,10 +175,10 @@ int main() {
  assert(closed_count == closed_before+2);
  int opens_before = file_opens;
  Java_org_matrix_vector_daemon_env_LogcatMonitor_refreshNative(&env, nullptr, true);
- send(ANDROID_LOG_FATAL, "VectorContext");
+ send(ANDROID_LOG_FATAL, "HraELLContext");
  assert(file_opens==opens_before && collector.modules_written_==0 && collector.verbose_written_==0);
  set(1);
- send(ANDROID_LOG_WARN, "VectorContext");
+ send(ANDROID_LOG_WARN, "HraELLContext");
  assert(collector.modules_written_>0 && file_opens==opens_before+2);
  puts("PASS: native output gate, Basic/Detailed filters, Off closes files, refresh stays silent, re-enable works");
 }

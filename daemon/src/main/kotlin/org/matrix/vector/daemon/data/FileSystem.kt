@@ -37,7 +37,7 @@ import org.matrix.vector.daemon.BuildConfig
 import org.matrix.vector.daemon.utils.ObfuscationManager
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorFileSystem"
+private const val TAG = "HraELLFileSystem"
 
 /**
  * What the module installer labels the module tree, and what [FileSystem] holds it to.
@@ -598,7 +598,7 @@ object FileSystem {
             // every branch build at the same depth wears the number of an official build it was
             // never made from. Without it an attached archive cannot be tied to a binary.
             val comment =
-                "Vector ${BuildConfig.BUILD_TYPE} ${BuildConfig.VERSION_NAME} " +
+                "HraELL ${BuildConfig.BUILD_TYPE} ${BuildConfig.VERSION_NAME} " +
                     "(${BuildConfig.VERSION_CODE}) ${BuildConfig.VERSION_HASH}"
             os.setComment(comment)
             os.setLevel(java.util.zip.Deflater.BEST_COMPRESSION)

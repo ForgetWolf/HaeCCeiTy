@@ -18,7 +18,7 @@ import java.util.stream.Collectors
 import org.matrix.vector.daemon.utils.getRealUsers
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorSystem"
+private const val TAG = "HraELLSystem"
 const val PER_USER_RANGE = 100000
 
 /**

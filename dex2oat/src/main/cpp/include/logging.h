@@ -5,7 +5,7 @@
 #include <errno.h>
 
 #ifndef LOG_TAG
-#define LOG_TAG "VectorDex2Oat"
+#define LOG_TAG "HraELLDex2Oat"
 #endif
 
 #ifdef LOG_DISABLED

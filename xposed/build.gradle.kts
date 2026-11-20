@@ -11,7 +11,7 @@ val versionNameProvider = rootProject.extra["versionNameProvider"] as Provider<S
  * already resolves that way, being read from the repository the build was invoked in.
  */
 val frameworkName: String =
-    runCatching { gradle.parent?.rootProject?.name }.getOrNull() ?: rootProject.name
+    runCatching { gradle.parent?.rootProject?.name }.getOrNull() ?: "HraELL"
 
 plugins {
     alias(libs.plugins.agp.lib)

@@ -187,7 +187,7 @@ object LaunchShortcut {
         val intent = launchIntent(context) ?: return null
         val builder =
             ShortcutInfo.Builder(context, ID)
-                .setShortLabel(context.getString(R.string.app_name))
+                .setShortLabel(context.getString(R.string.launcher_name))
                 .setIntent(intent)
         icon(context)?.let { builder.setIcon(it) }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

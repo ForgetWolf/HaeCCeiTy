@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.dnsoverhttps.DnsOverHttps
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorDns"
+private const val TAG = "HraELLDns"
 
 /**
  * The DoH preference, read by the resolver and written by the settings UI.

@@ -129,7 +129,7 @@ class FakeManagerService(
                         say("- Target: $zipPath")
                         say("- Extracting module files")
                         say("- Device is arm64-v8a API 36")
-                        say("- Installing Vector")
+                        say("- Installing HraELL")
                         say("- Setting permissions")
                         say("- Done. Reboot to apply.")
                         runCatching { receiver.onFinished(0) }
@@ -138,7 +138,7 @@ class FakeManagerService(
                         say("- Target: $zipPath")
                         say("- Extracting module files")
                         say("- Device is arm64-v8a API 36")
-                        say("- Installing Vector")
+                        say("- Installing HraELL")
                         say("! Failed to copy zygisk binary: No space left on device")
                         runCatching { receiver.onFinished(1) }
                     }

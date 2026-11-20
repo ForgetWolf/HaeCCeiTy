@@ -12,7 +12,7 @@ import java.lang.ClassNotFoundException
 import org.matrix.vector.daemon.system.*
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorWorkarounds"
+private const val TAG = "HraELLWorkarounds"
 private val isLenovo = Build.MANUFACTURER.equals("lenovo", ignoreCase = true)
 private val isXiaomi = Build.MANUFACTURER.equals("xiaomi", ignoreCase = true)
 

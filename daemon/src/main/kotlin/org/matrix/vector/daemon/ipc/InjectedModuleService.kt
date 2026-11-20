@@ -15,7 +15,7 @@ import org.matrix.vector.daemon.data.PreferenceStore
 import org.matrix.vector.daemon.system.PER_USER_RANGE
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorInjectedModuleService"
+private const val TAG = "HraELLInjectedModuleService"
 
 /**
  * A module's service as an **injected process** sees it — this project's `IModuleService`.

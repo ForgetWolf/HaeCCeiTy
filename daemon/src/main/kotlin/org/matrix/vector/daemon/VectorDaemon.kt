@@ -31,7 +31,7 @@ import org.matrix.vector.daemon.ipc.SystemServerService
 import org.matrix.vector.daemon.utils.applyNotificationWorkaround
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorDaemon"
+private const val TAG = "HraELLDaemon"
 private const val ACTION_SEND_BINDER = 1
 
 object VectorDaemon {
@@ -97,7 +97,7 @@ object VectorDaemon {
 
     Log.i(
         TAG,
-        "Vector daemon started: afterSystemServer=$startedAfterSystemServer, " +
+        "HraELL daemon started: afterSystemServer=$startedAfterSystemServer, " +
             "proxy=$proxyServiceName")
     // The hash is here rather than in the version the manager prints: Home should stay readable,
     // but every saved bug report should say exactly which commit produced the daemon that wrote it.
@@ -222,7 +222,7 @@ object VectorDaemon {
           }
 
           if (success) {
-            Log.i(TAG, "Successfully injected Vector IPC binder for applications.")
+            Log.i(TAG, "Successfully injected HraELL IPC binder for applications.")
             // Only the name we invented for a late injection: `serial` is a real service name,
             // and system_server registering it is what takes our proxy out of servicemanager.
             if (startedAfterSystemServer) SystemServerService.unregisterProxyService()
@@ -242,9 +242,9 @@ object VectorDaemon {
             // `systemServerRequested` is latched from inside `postServerSpecialize`, so a live
             // `activity` with nothing behind it means no module arrived at all.
             if (!SystemServerService.systemServerRequested) {
-              Log.e(TAG, "No Vector module reached system_server; leaving it running")
+              Log.e(TAG, "No HraELL module reached system_server; leaving it running")
             } else {
-              Log.e(TAG, "Vector reached system_server but its bridge never answered")
+              Log.e(TAG, "HraELL reached system_server but its bridge never answered")
             }
           }
         }

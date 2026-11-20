@@ -50,7 +50,7 @@ enum class VersionStatus { Installed, Diverged, Older, None }
 data class VersionHistoryItem(
     /** Stable identity handed back to [VersionHistorySheet]'s onSelect — a tag, or anything unique. */
     val id: String,
-    /** The build's name, one line: "Vector v2.0 canary 3060" / "LSPatch v1.1 (481)". */
+    /** The build's name, one line: "HraELL v2.0 canary 3060" / "LSPatch v1.1 (481)". */
     val title: String,
     /** The line beneath it, already formatted and localised: usually "<date>  ·  <channel>". */
     val subtitle: String,

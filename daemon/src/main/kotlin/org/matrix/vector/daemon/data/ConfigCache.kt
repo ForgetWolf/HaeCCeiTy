@@ -24,7 +24,7 @@ import org.matrix.vector.daemon.utils.applySqliteHelperWorkaround
 import org.matrix.vector.daemon.utils.getRealUsers
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorConfigCache"
+private const val TAG = "HraELLConfigCache"
 
 object ConfigCache {
   // Module preference operations are delegated to PreferenceStore

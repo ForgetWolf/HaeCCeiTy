@@ -23,7 +23,7 @@ public final class LogPolicy {
         int level = getLevel();
         if (level == OFF) return false;
         // Basic retains module failures, but arbitrary module chatter needs Detailed.
-        boolean module = tag.equals("VectorContext") || tag.equals("VectorLegacyBridge");
+        boolean module = tag.equals("HraELLContext") || tag.equals("HraELLLegacyBridge");
         return level == DETAILED || priority >= (module ? android.util.Log.WARN : android.util.Log.INFO);
     }
 }

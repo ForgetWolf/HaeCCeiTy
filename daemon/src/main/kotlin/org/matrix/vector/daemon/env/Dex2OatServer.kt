@@ -17,7 +17,7 @@ import org.matrix.vector.ipc.IManagerService
 import org.matrix.vector.daemon.VectorDaemon
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorDex2Oat"
+private const val TAG = "HraELLDex2Oat"
 
 // Wrapper states mirrored directly from the IManagerService AIDL contract.
 val DEX2OAT_OK = IManagerService.DEX2OAT_OK

@@ -33,7 +33,7 @@ import org.matrix.vector.daemon.system.PER_USER_RANGE
 import org.matrix.vector.daemon.system.activityManager
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorModuleAppService"
+private const val TAG = "HraELLModuleAppService"
 
 /**
  * A module's service as its own **app** sees it — libxposed's `IXposedService`.

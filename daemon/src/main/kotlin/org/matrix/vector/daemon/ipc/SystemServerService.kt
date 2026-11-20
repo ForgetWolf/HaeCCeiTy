@@ -12,7 +12,7 @@ import org.matrix.vector.daemon.*
 import org.matrix.vector.daemon.system.getSystemServiceManager
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorSystemServer"
+private const val TAG = "HraELLSystemServer"
 
 /**
  * The Android R half of [SystemServerService.registerProxyService], in a class of its own on

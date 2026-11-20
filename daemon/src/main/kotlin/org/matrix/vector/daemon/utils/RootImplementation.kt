@@ -7,7 +7,7 @@ import org.matrix.vector.ipc.IFrameworkInstallReceiver
 import org.matrix.vector.ipc.IManagerService
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorRootInstaller"
+private const val TAG = "HraELLRootInstaller"
 
 /**
  * Which root implementation is managing this device, and how to flash through it.

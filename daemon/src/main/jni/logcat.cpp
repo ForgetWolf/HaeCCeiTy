@@ -39,15 +39,16 @@ constexpr std::array<char, ANDROID_LOG_SILENT + 1> kLogChar = {
 
 // Module tags are sorted for O(log N) binary search.
 // These always route to the 'modules' (Xposed) log stream.
-constexpr auto kModuleTags = std::array{"VectorContext"sv, "VectorLegacyBridge"sv,
-                                        "VectorModuleManager"sv, "XSharedPreferences"sv};
+constexpr auto kModuleTags = std::array{"HraELLContext"sv, "HraELLLegacyBridge"sv,
+    "HraELLModuleManager"sv, "VectorContext"sv, "VectorLegacyBridge"sv,
+    "VectorModuleManager"sv, "XSharedPreferences"sv};
 
 // These route to the 'verbose' stream only.
 constexpr auto kExactTags = std::array{"APatchD"sv, "Dobby"sv,  "KernelSU"sv, "LSPlant"sv,
                                        "LSPlt"sv,   "Magisk"sv, "SELinux"sv,  "TEESimulator"sv};
 
 // Partial matches for dynamic components like Zygisk modules or Vector/LSPosed components.
-constexpr auto kPrefixTags = std::array{"LSPosed"sv, "Vector"sv, "dex2oat"sv, "zygisk"sv};
+constexpr auto kPrefixTags = std::array{"HraELL"sv, "LSPosed"sv, "Vector"sv, "dex2oat"sv, "zygisk"sv};
 
 // RAII Wrapper for File Descriptors to ensure files are closed during JNI rotation.
 struct UniqueFd {
@@ -202,7 +203,8 @@ void Logcat::ProcessBuffer(struct log_msg* buf) {
 
     // Check if tag is in the Module list
     bool is_module = std::binary_search(kModuleTags.begin(), kModuleTags.end(), tag);
-    const bool module_message = tag == "VectorContext"sv || tag == "VectorLegacyBridge"sv;
+    const bool module_message = tag == "HraELLContext"sv || tag == "HraELLLegacyBridge"sv ||
+        tag == "VectorContext"sv || tag == "VectorLegacyBridge"sv;
     if (capture_level == 1 &&
         entry.priority < (module_message ? ANDROID_LOG_WARN : ANDROID_LOG_INFO)) return;
     if (is_module) {

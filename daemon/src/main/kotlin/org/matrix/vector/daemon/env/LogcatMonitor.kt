@@ -18,7 +18,7 @@ import org.matrix.vector.daemon.VectorDaemon
 import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorLogcat"
+private const val TAG = "HraELLLogcat"
 private const val FD_MODE =
     ParcelFileDescriptor.MODE_WRITE_ONLY or
         ParcelFileDescriptor.MODE_CREATE or

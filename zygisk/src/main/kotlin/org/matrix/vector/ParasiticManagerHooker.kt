@@ -507,7 +507,7 @@ object ParasiticManagerHooker {
                         },
                     )
                 }
-                Utils.logD("Vector manager injected successfully into process.")
+                Utils.logD("HraELL manager injected successfully into process.")
                 true
             }
         } catch (e: Throwable) {

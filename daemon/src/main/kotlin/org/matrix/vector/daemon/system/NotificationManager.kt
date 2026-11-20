@@ -24,7 +24,7 @@ import org.matrix.vector.daemon.data.FileSystem
 import org.matrix.vector.daemon.utils.FakeContext
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorNotificationManager"
+private const val TAG = "HraELLNotificationManager"
 private const val STATUS_CHANNEL_ID = "vector_status"
 private const val UPDATED_CHANNEL_ID = "vector_module_updated"
 private const val STATUS_NOTIF_ID = BuildConfig.MANAGER_INJECTED_UID
@@ -132,7 +132,7 @@ object NotificationManager {
             .setVisibility(Notification.VISIBILITY_SECRET)
             .setOngoing(true)
             .build()
-            .apply { extras.putString("android.substName", BuildConfig.FRAMEWORK_NAME) }
+            .apply { extras.putString("android.substName", context.getString(R.string.framework_display_name)) }
 
     createChannels()
     runCatching {
@@ -483,7 +483,7 @@ object NotificationManager {
                             // through it.
                             scopePkgs.joinToString())))
             .build()
-            .apply { extras.putString("android.substName", BuildConfig.FRAMEWORK_NAME) }
+            .apply { extras.putString("android.substName", context.getString(R.string.framework_display_name)) }
 
     createChannels()
     val enqueued =
@@ -578,7 +578,7 @@ object NotificationManager {
             .setAutoCancel(true)
             .setStyle(Notification.BigTextStyle().bigText(content))
             .build()
-            .apply { extras.putString("android.substName", BuildConfig.FRAMEWORK_NAME) }
+            .apply { extras.putString("android.substName", context.getString(R.string.framework_display_name)) }
 
     createChannels()
     // The two notices this function posts are told apart, because only one of them can be made

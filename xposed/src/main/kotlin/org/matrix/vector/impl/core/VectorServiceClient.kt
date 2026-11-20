@@ -13,7 +13,7 @@ import org.matrix.vector.util.Log
  */
 object VectorServiceClient : IFrameworkService, IBinder.DeathRecipient {
 
-    private const val TAG = "VectorServiceClient"
+    private const val TAG = "HraELLServiceClient"
 
     private var service: IFrameworkService? = null
     var processName: String = ""

@@ -27,7 +27,7 @@ import org.matrix.vector.daemon.ipc.ModuleAppService
 import org.matrix.vector.daemon.system.*
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorService"
+private const val TAG = "HraELLService"
 
 object VectorService : IVectorDaemon.Stub() {
 

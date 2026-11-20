@@ -190,8 +190,8 @@ object OutputFormatter {
 @Command(
     name = "vector-cli",
     mixinStandardHelpOptions = true,
-    version = ["Vector CLI ${BuildConfig.VERSION_NAME}"],
-    description = ["A fast, scriptable CLI for configuring the Vector Framework daemon."],
+    version = ["HraELL CLI ${BuildConfig.VERSION_NAME}"],
+    description = ["A fast, scriptable CLI for configuring the HraELL Framework daemon."],
     subcommands =
         [
             StatusCommand::class,
@@ -218,7 +218,7 @@ class Cli : Callable<Int> {
     fun main(args: Array<String>) {
       val uid = Process.myUid()
       if (uid != 0) {
-        System.err.println("Permission denied: Vector CLI must run as root.")
+        System.err.println("Permission denied: HraELL CLI must run as root.")
         exitProcess(1)
       }
       val mainThread = Thread.currentThread()

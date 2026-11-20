@@ -20,7 +20,7 @@ import org.matrix.vector.daemon.utils.InstallerVerifier
 import org.matrix.vector.daemon.utils.ObfuscationManager
 import org.matrix.vector.logging.ManagedLog as Log
 
-private const val TAG = "VectorFrameworkService"
+private const val TAG = "HraELLFrameworkService"
 
 // Hardcoded transaction code from BridgeService
 const val BRIDGE_TRANSACTION_CODE =
