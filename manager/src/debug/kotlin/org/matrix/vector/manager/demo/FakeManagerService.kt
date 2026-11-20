@@ -218,6 +218,13 @@ class FakeManagerService(
     override fun getModuleScope(packageName: String?): MutableList<ScopeEntry>? =
         if (real == null) mutableListOf() else real.getModuleScope(packageName)
 
+    override fun getLogLevel(): Int = real?.logLevel ?: 0
+
+    override fun setLogLevel(level: Int) {
+        require(level in 0..2)
+        real?.setLogLevel(level)
+    }
+
     override fun isVerboseLogEnabled(): Boolean = real?.isVerboseLogEnabled ?: false
 
     override fun setVerboseLogEnabled(enabled: Boolean) {
