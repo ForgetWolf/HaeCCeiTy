@@ -141,8 +141,6 @@
         <item quantity="many">Последние %1$d месяцев</item>
         <item quantity="other">Последние %1$d месяцев</item>
     </plurals>
-    <string name="settings_open_externally">Открывать ссылки в браузере</string>
-    <string name="settings_open_externally_summary">Выключено: страницы GitHub открываются внутри HrÆLL.</string>
     <string name="scope_use_recommended">Взять то, что просит модуль</string>
     <string name="scope_select_visible">Выбрать всё показанное</string>
     <string name="scope_clear_visible">Снять со всего показанного</string>
@@ -248,8 +246,6 @@
     <string name="report_title">Прежде чем сообщать</string>
     <string name="report_step_canary">Сначала попробуйте свежую canary-сборку</string>
     <string name="report_step_canary_body">Возможно, это уже исправлено, а сопровождающим для помощи нужна отладочная сборка. Берите сборки из master — сборки из pull request нестабильны.</string>
-    <string name="report_step_zygisk">Не Magisk? Обновите Zygisk</string>
-    <string name="report_step_zygisk_body">Прошейте свежую реализацию Zygisk, по возможности отладочную.</string>
     <string name="report_step_logs">Приложите журналы</string>
     <string name="report_step_logs_body">Отчёт без журналов — это разговор с начала. Здесь оба журнала записываются в zip, который можно приложить.</string>
     <string name="report_step_crashed">Если Zygisk упал</string>
@@ -257,7 +253,6 @@
     <string name="report_open_tracker">Открыть трекер задач</string>
     <string name="report_save_with_root">Сохранить папку журналов (нужен root)</string>
     <string name="report_saved_to">Сохранено в %1$s</string>
-    <string name="report_see_guide">Полное руководство в issue</string>
     <string name="report_root_refused">В root отказано. Разрешите HrÆLL в вашем root-менеджере и повторите%1$s</string>
     <string name="home_custom_build">Своя сборка — новее master</string>
 
@@ -415,5 +410,10 @@
     <string name="classic_menu">Другие параметры</string>
     <string name="classic_check_update">Проверить обновления</string>
     <string name="classic_project">Страница проекта</string>
-    <string name="store_no_browser">Нет браузера для открытия ссылки на скачивание.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Предпочитать браузер по умолчанию</string>
+    <string name="settings_prefer_browser_summary">Включено: использовать браузер по умолчанию. Выключено: система выбирает приложение для каждой ссылки.</string>
+    <string name="links_choose_browser">Выбрать браузер</string>
+    <string name="links_open_failed">Не удалось открыть ссылку. Проверьте наличие подходящего приложения.</string>
 </resources>

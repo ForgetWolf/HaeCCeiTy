@@ -139,8 +139,6 @@
     <plurals name="settings_window_months">
         <item quantity="other">%1$d bulan terakhir</item>
     </plurals>
-    <string name="settings_open_externally">Buka tautan di peramban</string>
-    <string name="settings_open_externally_summary">Mati: halaman GitHub dibuka di dalam HrÆLL.</string>
 
     <string name="scope_use_recommended">Pakai yang diminta modul</string>
     <string name="scope_select_visible">Pilih semua yang tampil</string>
@@ -240,8 +238,6 @@
     <string name="report_title">Sebelum melapor</string>
     <string name="report_step_canary">Coba dulu canary terbaru</string>
     <string name="report_step_canary_body">Mungkin sudah diperbaiki, dan build debug adalah yang dibutuhkan pemelihara untuk membantu Anda. Tetap di master — build dari pull request tidak stabil.</string>
-    <string name="report_step_zygisk">Tidak memakai Magisk? Perbarui Zygisk</string>
-    <string name="report_step_zygisk_body">Pasang implementasi Zygisk terbaru, dalam build debug bila ada.</string>
     <string name="report_step_logs">Lampirkan log</string>
     <string name="report_step_logs_body">Laporan tanpa log adalah percakapan yang dimulai dari awal lagi. Ini menulis kedua log ke sebuah zip yang bisa Anda lampirkan.</string>
     <string name="report_step_crashed">Jika Zygisk mogok</string>
@@ -249,7 +245,6 @@
     <string name="report_open_tracker">Buka pelacak masalah</string>
     <string name="report_save_with_root">Simpan folder log (perlu root)</string>
     <string name="report_saved_to">Disimpan ke %1$s</string>
-    <string name="report_see_guide">Panduan lengkap ada di isu</string>
     <string name="report_root_refused">Root ditolak. Izinkan HrÆLL di pengelola root Anda, lalu coba lagi%1$s</string>
     <string name="home_custom_build">Build sendiri — lebih maju dari master</string>
     <string name="language_title">Bahasa</string>
@@ -403,5 +398,10 @@
     <string name="classic_menu">Opsi lainnya</string>
     <string name="classic_check_update">Periksa pembaruan</string>
     <string name="classic_project">Halaman proyek</string>
-    <string name="store_no_browser">Tidak ada browser untuk membuka tautan unduhan.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Utamakan browser default</string>
+    <string name="settings_prefer_browser_summary">Aktif: gunakan browser default. Nonaktif: sistem memilih aplikasi untuk setiap tautan.</string>
+    <string name="links_choose_browser">Pilih browser</string>
+    <string name="links_open_failed">Tidak dapat membuka tautan ini. Pastikan aplikasi yang sesuai tersedia.</string>
 </resources>

@@ -1,7 +1,6 @@
 package org.matrix.vector.manager.ui.screens.home
 
 import android.os.Build
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -35,19 +34,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,10 +53,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.launch
 import org.matrix.vector.manager.ui.theme.LocalizedOverlay
 import org.matrix.vector.manager.R
 import org.matrix.vector.ui.SheetHeading
+import org.matrix.vector.ui.PredictiveBackBottomSheet
 import org.matrix.vector.ui.ToggleRow
 import org.matrix.vector.ui.net.DohSettingSection
 import org.matrix.vector.manager.di.ServiceLocator
@@ -107,31 +101,9 @@ fun HomeAppearanceSheet(onDismiss: () -> Unit) {
             ThemeMode.Light -> false
             ThemeMode.Dark -> true
         }
-    val openExternally by settings.openLinksExternally.collectAsStateWithLifecycle()
+    val preferBrowser by settings.preferDefaultBrowser.collectAsStateWithLifecycle()
 
-    // Every value stays enabled, deliberately. Dropping PartiallyExpanded removes the half-height
-    // stop, which is the only thing a drag on a sheet can *do* other than dismiss it, so a sheet
-    // taller than half the screen would open at full height and could not be made smaller. Left
-    // alone, Material caps that stop at the sheet's own height, so short sheets still open at
-    // their own height and nothing gains a useless drag.
-    val sheetState = rememberBottomSheetState(initialValue = SheetValue.Hidden)
-    val scope = rememberCoroutineScope()
-
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = sheetState,
-        properties = ModalBottomSheetProperties(shouldDismissOnBackPress = false),
-    ) {
-        // Handle back in the sheet's dialog, using its vertical hide animation.
-        // A cancelled back gesture never invokes this callback.
-        BackHandler {
-            if (sheetState.targetValue != SheetValue.Hidden) {
-                scope.launch {
-                    sheetState.hide()
-                    if (!sheetState.isVisible) onDismiss()
-                }
-            }
-        }
+    PredictiveBackBottomSheet(onDismissRequest = onDismiss) {
 LocalizedOverlay {
 
         Column(
@@ -169,11 +141,11 @@ LocalizedOverlay {
             DohSettingSection(settings, ServiceLocator.dns.status, ServiceLocator.dns::retry)
 
             ToggleRow(
-                title = stringResource(R.string.settings_open_externally),
+                title = stringResource(R.string.settings_prefer_browser),
                 icon = Icons.Rounded.OpenInBrowser,
-                subtitle = stringResource(R.string.settings_open_externally_summary),
-                checked = openExternally,
-                onCheckedChange = settings::setOpenLinksExternally,
+                subtitle = stringResource(R.string.settings_prefer_browser_summary),
+                checked = preferBrowser,
+                onCheckedChange = settings::setPreferDefaultBrowser,
             )
 
         }

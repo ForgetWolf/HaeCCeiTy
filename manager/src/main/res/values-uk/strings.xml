@@ -153,8 +153,6 @@
         <item quantity="many">Останні %1$d місяців</item>
         <item quantity="other">Останні %1$d місяця</item>
     </plurals>
-    <string name="settings_open_externally">Відкривати посилання в браузері</string>
-    <string name="settings_open_externally_summary">Вимкнено: сторінки GitHub відкриваються всередині HrÆLL.</string>
 
     <string name="scope_use_recommended">Узяти те, що просить модуль</string>
     <string name="scope_select_visible">Вибрати все показане</string>
@@ -266,8 +264,6 @@
     <string name="report_title">Перш ніж повідомляти</string>
     <string name="report_step_canary">Спершу спробуйте найновіший canary</string>
     <string name="report_step_canary_body">Можливо, це вже виправлено, а супровідникам для допомоги потрібна саме зневаджувальна збірка. Тримайтеся master — збірки з pull request нестабільні.</string>
-    <string name="report_step_zygisk">Не на Magisk? Оновіть Zygisk</string>
-    <string name="report_step_zygisk_body">Прошийте найновішу реалізацію Zygisk, у зневаджувальній збірці, якщо така є.</string>
     <string name="report_step_logs">Додайте журнали</string>
     <string name="report_step_logs_body">Повідомлення без журналів — це розмова, що починається спочатку. Тут обидва журнали записуються в zip, який можна прикріпити.</string>
     <string name="report_step_crashed">Якщо Zygisk аварійно завершився</string>
@@ -275,7 +271,6 @@
     <string name="report_open_tracker">Відкрити трекер задач</string>
     <string name="report_save_with_root">Зберегти теку журналів (потрібен root)</string>
     <string name="report_saved_to">Збережено до %1$s</string>
-    <string name="report_see_guide">Повний посібник у задачі</string>
     <string name="report_root_refused">Root відхилено. Дозвольте HrÆLL у своєму root-менеджері й спробуйте ще раз%1$s</string>
     <string name="home_custom_build">Власна збірка — попереду master</string>
     <string name="language_title">Мова</string>
@@ -446,5 +441,10 @@
     <string name="classic_menu">Інші параметри</string>
     <string name="classic_check_update">Перевірити оновлення</string>
     <string name="classic_project">Сторінка проєкту</string>
-    <string name="store_no_browser">Немає браузера для відкриття посилання на завантаження.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Надавати перевагу типовому браузеру</string>
+    <string name="settings_prefer_browser_summary">Увімкнено: використовувати типовий браузер. Вимкнено: система вибирає застосунок для кожного посилання.</string>
+    <string name="links_choose_browser">Вибрати браузер</string>
+    <string name="links_open_failed">Не вдалося відкрити посилання. Перевірте наявність відповідного застосунку.</string>
 </resources>

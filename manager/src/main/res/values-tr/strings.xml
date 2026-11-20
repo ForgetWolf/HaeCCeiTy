@@ -141,8 +141,6 @@
         <item quantity="one">Son %1$d ay</item>
         <item quantity="other">Son %1$d ay</item>
     </plurals>
-    <string name="settings_open_externally">Bağlantıları tarayıcıda aç</string>
-    <string name="settings_open_externally_summary">Kapalı: GitHub sayfaları HrÆLL içinde açılır.</string>
 
     <string name="scope_use_recommended">Modülün istediğini kullan</string>
     <string name="scope_select_visible">Görünenlerin tümünü seç</string>
@@ -246,8 +244,6 @@
     <string name="report_title">Bildirmeden önce</string>
     <string name="report_step_canary">Önce en son canary\'yi deneyin</string>
     <string name="report_step_canary_body">Sorun çoktan giderilmiş olabilir; ayrıca bakımcıların size yardım edebilmesi için hata ayıklama sürümü gerekir. master\'da kalın — pull request derlemeleri kararsızdır.</string>
-    <string name="report_step_zygisk">Magisk kullanmıyor musunuz? Zygisk\'i güncelleyin</string>
-    <string name="report_step_zygisk_body">En son Zygisk uygulamasını, varsa hata ayıklama sürümüyle yükleyin.</string>
     <string name="report_step_logs">Günlükleri ekleyin</string>
     <string name="report_step_logs_body">Günlüksüz bir bildirim, baştan başlayan bir konuşmadır. Bu işlem iki günlüğü de ekleyebileceğiniz bir zip dosyasına yazar.</string>
     <string name="report_step_crashed">Zygisk çöktüyse</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">Sorun takipçisini aç</string>
     <string name="report_save_with_root">Günlük klasörünü kaydet (root gerekir)</string>
     <string name="report_saved_to">%1$s konumuna kaydedildi</string>
-    <string name="report_see_guide">Tam kılavuz sorunda</string>
     <string name="report_root_refused">Root reddedildi. Root yöneticinizde HrÆLL\'e izin verip yeniden deneyin%1$s</string>
     <string name="home_custom_build">Özel derleme — master\'ın ilerisinde</string>
     <string name="language_title">Dil</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">Diğer seçenekler</string>
     <string name="classic_check_update">Güncellemeleri denetle</string>
     <string name="classic_project">Proje sayfası</string>
-    <string name="store_no_browser">İndirme bağlantısını açabilecek bir tarayıcı yok.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Varsayılan tarayıcıyı tercih et</string>
+    <string name="settings_prefer_browser_summary">Açık: varsayılan tarayıcıyı kullan. Kapalı: her bağlantı için uygulamayı sistem seçsin.</string>
+    <string name="links_choose_browser">Tarayıcı seçin</string>
+    <string name="links_open_failed">Bu bağlantı açılamadı. Uygun bir uygulamanın mevcut olduğunu kontrol edin.</string>
 </resources>

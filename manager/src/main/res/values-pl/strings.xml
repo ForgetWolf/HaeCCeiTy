@@ -209,8 +209,6 @@
         <item quantity="many">Ostatnie %1$d miesięcy</item>
         <item quantity="other">Ostatnie %1$d miesięcy</item>
     </plurals>
-    <string name="settings_open_externally">Otwieraj linki w przeglądarce</string>
-    <string name="settings_open_externally_summary">Wyłączone: strony GitHuba otwierają się wewnątrz HrÆLLa.</string>
     <!-- Scope editor -->
     <string name="scope_use_recommended">Użyj tego, czego wymaga moduł</string>
     <string name="scope_select_visible">Zaznacz wszystko, co jest pokazane</string>
@@ -381,8 +379,6 @@
     <string name="report_title">Zanim zgłosisz</string>
     <string name="report_step_canary">Najpierw wypróbuj najnowsze Canary</string>
     <string name="report_step_canary_body">Może to być już naprawione, a kompilacja debug jest tym, czego potrzebują opiekunowie, aby ci pomóc. Pozostań na głównej gałęzi — kompilacje żądań zmian są niestabilne.</string>
-    <string name="report_step_zygisk">Nie masz Magiska? Zaktualizuj Zygisk</string>
-    <string name="report_step_zygisk_body">Wgraj najnowszą implementację Zygiska, w jego kompilacji debug, jeśli taka istnieje.</string>
     <string name="report_step_logs">Dołącz dzienniki</string>
     <string name="report_step_logs_body">Raport bez dzienników to rozmowa, która zaczyna się od początku. Spowoduje to zapisanie obu dzienników do pliku zip, który możesz dołączyć.</string>
     <string name="report_step_crashed">Jeśli Zygisk uległ awarii</string>
@@ -390,7 +386,6 @@
     <string name="report_open_tracker">Otwórz system zgłaszania problemów</string>
     <string name="report_save_with_root">Zapisz folder dziennika (wymaga roota)</string>
     <string name="report_saved_to">Zapisano w %1$s</string>
-    <string name="report_see_guide">Pełny poradnik w zgłoszeniu</string>
     <string name="report_root_refused">Odmówiono dostępu root. Zezwól HrÆLLowi na dostęp w swoim menedżerze roota, a następnie spróbuj ponownie%1$s</string>
     <string name="home_custom_build">Niestandardowa kompilacja — nowsza niż główna</string>
     <string name="language_title">Język</string>
@@ -466,5 +461,10 @@
     <string name="classic_menu">Więcej opcji</string>
     <string name="classic_check_update">Sprawdź aktualizacje</string>
     <string name="classic_project">Strona projektu</string>
-    <string name="store_no_browser">Brak przeglądarki do otwarcia łącza pobierania.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Preferuj domyślną przeglądarkę</string>
+    <string name="settings_prefer_browser_summary">Włączone: używaj domyślnej przeglądarki. Wyłączone: system wybiera aplikację dla każdego linku.</string>
+    <string name="links_choose_browser">Wybierz przeglądarkę</string>
+    <string name="links_open_failed">Nie można otworzyć tego linku. Sprawdź, czy dostępna jest odpowiednia aplikacja.</string>
 </resources>

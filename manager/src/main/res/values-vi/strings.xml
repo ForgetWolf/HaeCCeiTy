@@ -135,8 +135,6 @@
     <plurals name="settings_window_months">
         <item quantity="other">%1$d tháng gần nhất</item>
     </plurals>
-    <string name="settings_open_externally">Mở liên kết bằng trình duyệt</string>
-    <string name="settings_open_externally_summary">Tắt: các trang GitHub mở ngay trong HrÆLL.</string>
 
     <string name="scope_use_recommended">Dùng đúng những gì mô-đun yêu cầu</string>
     <string name="scope_select_visible">Chọn hết những mục đang hiện</string>
@@ -236,8 +234,6 @@
     <string name="report_title">Trước khi báo lỗi</string>
     <string name="report_step_canary">Hãy thử bản canary mới nhất trước</string>
     <string name="report_step_canary_body">Có thể lỗi đã được sửa rồi, và người bảo trì cần bản gỡ lỗi mới giúp được bạn. Hãy dùng bản từ master — bản dựng của pull request không ổn định.</string>
-    <string name="report_step_zygisk">Không dùng Magisk? Cập nhật Zygisk</string>
-    <string name="report_step_zygisk_body">Nạp bản Zygisk mới nhất, chọn bản gỡ lỗi nếu có.</string>
     <string name="report_step_logs">Đính kèm nhật ký</string>
     <string name="report_step_logs_body">Một báo cáo không có nhật ký là cuộc trò chuyện bắt đầu lại từ đầu. Thao tác này ghi cả hai nhật ký vào một tệp zip để bạn đính kèm.</string>
     <string name="report_step_crashed">Nếu Zygisk đã sập</string>
@@ -245,7 +241,6 @@
     <string name="report_open_tracker">Mở trang theo dõi lỗi</string>
     <string name="report_save_with_root">Lưu thư mục nhật ký (cần root)</string>
     <string name="report_saved_to">Đã lưu vào %1$s</string>
-    <string name="report_see_guide">Hướng dẫn đầy đủ ở issue</string>
     <string name="report_root_refused">Root bị từ chối. Hãy cho phép HrÆLL trong trình quản lý root rồi thử lại%1$s</string>
     <string name="home_custom_build">Bản dựng riêng — mới hơn master</string>
     <string name="language_title">Ngôn ngữ</string>
@@ -399,5 +394,10 @@
     <string name="classic_menu">Tùy chọn khác</string>
     <string name="classic_check_update">Kiểm tra cập nhật</string>
     <string name="classic_project">Trang dự án</string>
-    <string name="store_no_browser">Không có trình duyệt để mở liên kết tải xuống.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Ưu tiên trình duyệt mặc định</string>
+    <string name="settings_prefer_browser_summary">Bật: dùng trình duyệt mặc định. Tắt: hệ thống chọn ứng dụng cho từng liên kết.</string>
+    <string name="links_choose_browser">Chọn trình duyệt</string>
+    <string name="links_open_failed">Không thể mở liên kết này. Hãy kiểm tra xem có ứng dụng phù hợp hay không.</string>
 </resources>

@@ -10,8 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.BugReport
+import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.SystemUpdate
+import androidx.compose.material.icons.rounded.Translate
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Warning
@@ -44,7 +50,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.matrix.vector.manager.R
 import org.matrix.vector.manager.ui.components.FrameworkState
 import org.matrix.vector.manager.ui.components.statusWordRes
-import org.matrix.vector.manager.ui.theme.CROWDIN_URL
 import org.matrix.vector.manager.ui.theme.VectorLocaleController
 import org.matrix.vector.ui.locale.LanguageSheet
 
@@ -75,25 +80,35 @@ fun HomeScreen(
                     IconButton(onClick = { menuOpen = true }) {
                         Icon(Icons.Rounded.MoreVert, stringResource(R.string.classic_menu))
                     }
-                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                    DropdownMenu(
+                        expanded = menuOpen,
+                        onDismissRequest = { menuOpen = false },
+                        modifier = Modifier.widthIn(min = 224.dp, max = 280.dp),
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                    ) {
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.appearance_title)) },
+                            trailingIcon = { Icon(Icons.Rounded.Palette, contentDescription = null) },
                             onClick = { menuOpen = false; appearanceOpen = true },
                         )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.language_title)) },
+                            trailingIcon = { Icon(Icons.Rounded.Translate, contentDescription = null) },
                             onClick = { menuOpen = false; languageOpen = true },
                         )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.classic_check_update)) },
+                            trailingIcon = { Icon(Icons.Rounded.SystemUpdate, contentDescription = null) },
                             onClick = { menuOpen = false; onOpenUpdate() },
                         )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.home_open_issue)) },
+                            trailingIcon = { Icon(Icons.Rounded.BugReport, contentDescription = null) },
                             onClick = { menuOpen = false; onOpenReport() },
                         )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.classic_project)) },
+                            trailingIcon = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null) },
                             onClick = { menuOpen = false; onOpenUrl("https://github.com/JingMatrix/Vector") },
                         )
                     }
@@ -162,8 +177,7 @@ fun HomeScreen(
         LanguageSheet(
             controller = VectorLocaleController,
             onDismiss = { languageOpen = false },
-            onHelpTranslate = { onOpenUrl(CROWDIN_URL) },
-            onOpenUrl = onOpenUrl,
+            showTranslatorCredits = false,
         )
     }
 }

@@ -135,8 +135,6 @@
     <plurals name="settings_window_months">
         <item quantity="other">直近 %1$d か月</item>
     </plurals>
-    <string name="settings_open_externally">リンクをブラウザで開く</string>
-    <string name="settings_open_externally_summary">オフのとき、GitHub のページは HrÆLL 内で開きます。</string>
 
     <string name="scope_use_recommended">モジュールの要求どおりにする</string>
     <string name="scope_select_visible">表示中のすべてを選択</string>
@@ -236,8 +234,6 @@
     <string name="report_title">報告する前に</string>
     <string name="report_step_canary">まず最新の Canary を試す</string>
     <string name="report_step_canary_body">すでに修正されている可能性があり、メンテナが問題を調査や支援をするにはデバッグビルドが必要です。master ブランチを使い続けてください (プルリクエストのビルドは不安定なため)。</string>
-    <string name="report_step_zygisk">Magisk 以外をお使いですか？ Zygisk を更新してください</string>
-    <string name="report_step_zygisk_body">最新の Zygisk 実装をフラッシュしてください。デバッグビルドが存在する場合は、それを使用してください。</string>
     <string name="report_step_logs">ログを添付</string>
     <string name="report_step_logs_body">ログのないバグレポートは、最初からやり直す会話のようなものです。この処理では、添付可能な ZIP ファイルに両方のログが書き出されます。</string>
     <string name="report_step_crashed">Zygisk がクラッシュした場合</string>
@@ -245,7 +241,6 @@
     <string name="report_open_tracker">課題トラッカーを開く</string>
     <string name="report_save_with_root">ログフォルダを保存 (root 権限が必要です)</string>
     <string name="report_saved_to">%1$s に保存しました</string>
-    <string name="report_see_guide">詳しい手引きは課題に</string>
     <string name="report_root_refused">root 権限の付与が拒否されました。root 権限マネージャーで HrÆLL を許可してから、もう一度試してください%1$s</string>
     <string name="home_custom_build">独自ビルド — master より先行</string>
     <string name="language_title">言語</string>
@@ -392,5 +387,10 @@
     <string name="classic_menu">その他のオプション</string>
     <string name="classic_check_update">更新を確認</string>
     <string name="classic_project">プロジェクトページ</string>
-    <string name="store_no_browser">ダウンロードリンクを開けるブラウザがありません。</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">既定のブラウザを優先</string>
+    <string name="settings_prefer_browser_summary">オン：既定のブラウザを使用します。オフ：リンクごとにシステムが開くアプリを選びます。</string>
+    <string name="links_choose_browser">ブラウザを選択</string>
+    <string name="links_open_failed">このリンクを開けませんでした。対応するアプリがあるか確認してください。</string>
 </resources>

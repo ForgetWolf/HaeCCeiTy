@@ -157,8 +157,6 @@
         <item quantity="many">%1$d החודשים האחרונים</item>
         <item quantity="other">%1$d החודשים האחרונים</item>
     </plurals>
-    <string name="settings_open_externally">פתיחת קישורים בדפדפן</string>
-    <string name="settings_open_externally_summary">כבוי: דפי GitHub נפתחים בתוך HrÆLL.</string>
 
     <string name="scope_use_recommended">להשתמש במה שהמודול מבקש</string>
     <string name="scope_select_visible">בחירת כל מה שמוצג</string>
@@ -270,8 +268,6 @@
     <string name="report_title">לפני שמדווחים</string>
     <string name="report_step_canary">נסו קודם את ה-canary האחרון</string>
     <string name="report_step_canary_body">ייתכן שזה כבר תוקן, וגרסת ניפוי שגיאות היא מה שהמתחזקים צריכים כדי לעזור לכם. הישארו על master — גרסאות מ-pull request אינן יציבות.</string>
-    <string name="report_step_zygisk">לא על Magisk? עדכנו את Zygisk</string>
-    <string name="report_step_zygisk_body">התקינו את המימוש העדכני של Zygisk, בגרסת ניפוי השגיאות אם קיימת.</string>
     <string name="report_step_logs">צרפו יומנים</string>
     <string name="report_step_logs_body">דיווח בלי יומנים הוא שיחה שמתחילה מהתחלה. הפעולה הזאת כותבת את שני היומנים לקובץ zip שאפשר לצרף.</string>
     <string name="report_step_crashed">אם Zygisk קרס</string>
@@ -279,7 +275,6 @@
     <string name="report_open_tracker">פתיחת מעקב התקלות</string>
     <string name="report_save_with_root">שמירת תיקיית היומנים (דורש root)</string>
     <string name="report_saved_to">נשמר ב-%1$s</string>
-    <string name="report_see_guide">המדריך המלא בתקלה</string>
     <string name="report_root_refused">‏root נדחה. אשרו את HrÆLL במנהל ה-root שלכם ונסו שוב%1$s</string>
     <string name="home_custom_build">גרסה עצמאית — מקדימה את master</string>
     <string name="language_title">שפה</string>
@@ -436,5 +431,10 @@
     <string name="classic_menu">אפשרויות נוספות</string>
     <string name="classic_check_update">בדיקת עדכונים</string>
     <string name="classic_project">דף הפרויקט</string>
-    <string name="store_no_browser">אין דפדפן זמין לפתיחת קישור ההורדה.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">העדפת דפדפן ברירת המחדל</string>
+    <string name="settings_prefer_browser_summary">פעיל: שימוש בדפדפן ברירת המחדל. כבוי: המערכת בוחרת יישום לכל קישור.</string>
+    <string name="links_choose_browser">בחירת דפדפן</string>
+    <string name="links_open_failed">לא ניתן לפתוח קישור זה. יש לוודא שקיים יישום מתאים.</string>
 </resources>

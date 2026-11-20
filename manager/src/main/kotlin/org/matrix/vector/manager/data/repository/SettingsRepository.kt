@@ -87,16 +87,10 @@ class SettingsRepository(context: Context) : StoreSettings, NetworkSettings {
     private val _activityWindowMonths = MutableStateFlow(prefs.getInt("activity_window_months", 6))
     val activityWindowMonths: StateFlow<Int> = _activityWindowMonths.asStateFlow()
 
-    /**
-     * Whether GitHub links leave the app.
-     *
-     * Off by default: the built-in viewer keeps the user in Vector, which matters most in
-     * parasitic mode where "the app" is really the shell process and handing off to a browser is a
-     * jarring context switch out of something that does not look like an app to the system.
-     */
-    private val _openLinksExternally =
-        MutableStateFlow(prefs.getBoolean("open_links_externally", false))
-    val openLinksExternally: StateFlow<Boolean> = _openLinksExternally.asStateFlow()
+    /** Prefer a full external browser over the system's domain-associated app. */
+    private val _preferDefaultBrowser =
+        MutableStateFlow(prefs.getBoolean("prefer_default_browser", true))
+    val preferDefaultBrowser: StateFlow<Boolean> = _preferDefaultBrowser.asStateFlow()
 
     /**
      * How the scope list is filtered and ordered, remembered across visits.
@@ -263,9 +257,9 @@ class SettingsRepository(context: Context) : StoreSettings, NetworkSettings {
         _activityWindowMonths.value = months
     }
 
-    fun setOpenLinksExternally(enabled: Boolean) {
-        prefs.edit().putBoolean("open_links_externally", enabled).apply()
-        _openLinksExternally.value = enabled
+    fun setPreferDefaultBrowser(enabled: Boolean) {
+        prefs.edit().putBoolean("prefer_default_browser", enabled).apply()
+        _preferDefaultBrowser.value = enabled
     }
 
     /**

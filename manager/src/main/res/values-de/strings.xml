@@ -141,8 +141,6 @@
         <item quantity="one">Letzter %1$d Monat</item>
         <item quantity="other">Letzte %1$d Monate</item>
     </plurals>
-    <string name="settings_open_externally">Links im Browser öffnen</string>
-    <string name="settings_open_externally_summary">Aus: GitHub-Seiten öffnen sich in HrÆLL.</string>
 
     <string name="scope_use_recommended">Nehmen, was das Modul verlangt</string>
     <string name="scope_select_visible">Alles Angezeigte auswählen</string>
@@ -246,8 +244,6 @@
     <string name="report_title">Bevor du meldest</string>
     <string name="report_step_canary">Zuerst den neuesten Canary probieren</string>
     <string name="report_step_canary_body">Vielleicht ist es schon behoben, und ein Debug-Build ist das, was die Maintainer brauchen, um dir zu helfen. Bleib bei master — Builds aus Pull Requests sind instabil.</string>
-    <string name="report_step_zygisk">Nicht auf Magisk? Zygisk aktualisieren</string>
-    <string name="report_step_zygisk_body">Flashe die neueste Zygisk-Implementierung, als Debug-Build, falls es einen gibt.</string>
     <string name="report_step_logs">Protokolle anhängen</string>
     <string name="report_step_logs_body">Eine Meldung ohne Protokolle ist ein Gespräch, das von vorn beginnt. Dies schreibt beide Protokolle in eine ZIP-Datei, die du anhängen kannst.</string>
     <string name="report_step_crashed">Wenn Zygisk abgestürzt ist</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">Issue-Tracker öffnen</string>
     <string name="report_save_with_root">Protokollordner sichern (benötigt Root)</string>
     <string name="report_saved_to">Gespeichert unter %1$s</string>
-    <string name="report_see_guide">Vollständige Anleitung im Issue</string>
     <string name="report_root_refused">Root verweigert. Erlaube HrÆLL in deinem Root-Manager und versuche es erneut%1$s</string>
     <string name="home_custom_build">Eigener Build — neuer als master</string>
     <string name="language_title">Sprache</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">Weitere Optionen</string>
     <string name="classic_check_update">Nach Updates suchen</string>
     <string name="classic_project">Projektseite</string>
-    <string name="store_no_browser">Kein Browser zum Öffnen des Downloadlinks verfügbar.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Standardbrowser bevorzugen</string>
+    <string name="settings_prefer_browser_summary">Ein: Standardbrowser verwenden. Aus: Das System wählt die App für den jeweiligen Link.</string>
+    <string name="links_choose_browser">Browser auswählen</string>
+    <string name="links_open_failed">Dieser Link konnte nicht geöffnet werden. Prüfe, ob eine geeignete App verfügbar ist.</string>
 </resources>

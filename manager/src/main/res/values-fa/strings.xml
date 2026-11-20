@@ -141,8 +141,6 @@
         <item quantity="one">%1$d ماه اخیر</item>
         <item quantity="other">%1$d ماه اخیر</item>
     </plurals>
-    <string name="settings_open_externally">باز کردن پیوندها در مرورگر</string>
-    <string name="settings_open_externally_summary">خاموش: صفحه‌های GitHub درون HrÆLL باز می‌شوند.</string>
 
     <string name="scope_use_recommended">همان چیزی که ماژول می‌خواهد</string>
     <string name="scope_select_visible">گزینش همهٔ موارد نمایان</string>
@@ -246,8 +244,6 @@
     <string name="report_title">پیش از گزارش</string>
     <string name="report_step_canary">نخست تازه‌ترین canary را بیازمایید</string>
     <string name="report_step_canary_body">شاید همین حالا درست شده باشد، و نگه‌دارندگان برای کمک به شما به ساخت اشکال‌زدایی نیاز دارند. روی master بمانید — ساخت‌های pull request ناپایدارند.</string>
-    <string name="report_step_zygisk">‏Magisk ندارید؟ Zygisk را به‌روز کنید</string>
-    <string name="report_step_zygisk_body">تازه‌ترین پیاده‌سازی Zygisk را نصب کنید؛ اگر ساخت اشکال‌زدایی دارد، همان را.</string>
     <string name="report_step_logs">گزارش‌ها را پیوست کنید</string>
     <string name="report_step_logs_body">گزارشی بدون لاگ، گفتگویی است که از صفر آغاز می‌شود. اینجا هر دو گزارش در یک zip نوشته می‌شود که می‌توانید پیوست کنید.</string>
     <string name="report_step_crashed">اگر Zygisk فروپاشیده است</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">باز کردن پی‌گیر مشکلات</string>
     <string name="report_save_with_root">ذخیرهٔ پوشهٔ گزارش‌ها (نیازمند روت)</string>
     <string name="report_saved_to">در %1$s ذخیره شد</string>
-    <string name="report_see_guide">راهنمای کامل در همان مسئله</string>
     <string name="report_root_refused">روت رد شد. در مدیر روت خود به HrÆLL اجازه دهید و دوباره تلاش کنید%1$s</string>
     <string name="home_custom_build">ساخت شخصی — جلوتر از master</string>
     <string name="language_title">زبان</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">گزینه‌های بیشتر</string>
     <string name="classic_check_update">بررسی به‌روزرسانی‌ها</string>
     <string name="classic_project">صفحهٔ پروژه</string>
-    <string name="store_no_browser">مرورگری برای باز کردن پیوند بارگیری در دسترس نیست.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">ترجیح مرورگر پیش‌فرض</string>
+    <string name="settings_prefer_browser_summary">روشن: استفاده از مرورگر پیش‌فرض. خاموش: سیستم برنامهٔ مناسب هر پیوند را انتخاب می‌کند.</string>
+    <string name="links_choose_browser">انتخاب مرورگر</string>
+    <string name="links_open_failed">باز کردن این پیوند ممکن نشد. وجود برنامهٔ مناسب را بررسی کنید.</string>
 </resources>

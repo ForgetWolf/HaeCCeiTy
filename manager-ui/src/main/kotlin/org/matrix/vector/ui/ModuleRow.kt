@@ -1,8 +1,6 @@
 package org.matrix.vector.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,14 +9,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.Icon
@@ -145,22 +140,7 @@ fun ModuleRow(
             Box(modifier = Modifier.size(ICON_SIZE), contentAlignment = Alignment.Center) {
                 icon()
                 if (selected) {
-                    Box(
-                        modifier =
-                            Modifier.align(Alignment.BottomEnd)
-                                .offset(x = 2.dp, y = 2.dp)
-                                .size(20.dp)
-                                .background(colors.primary, CircleShape)
-                                .border(2.dp, colors.surface, CircleShape),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(
-                            Icons.Rounded.Check,
-                            contentDescription = null,
-                            tint = colors.onPrimary,
-                            modifier = Modifier.size(12.dp),
-                        )
-                    }
+                    SelectionBadge(Modifier.align(Alignment.BottomEnd))
                 }
             }
             Spacer(Modifier.height(6.dp))

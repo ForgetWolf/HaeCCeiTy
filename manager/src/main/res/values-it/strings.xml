@@ -141,8 +141,6 @@
         <item quantity="one">Ultimo %1$d mese</item>
         <item quantity="other">Ultimi %1$d mesi</item>
     </plurals>
-    <string name="settings_open_externally">Apri i link in un browser</string>
-    <string name="settings_open_externally_summary">Disattivato: le pagine GitHub si aprono dentro HrÆLL.</string>
 
     <string name="scope_use_recommended">Usa quello che chiede il modulo</string>
     <string name="scope_select_visible">Seleziona tutto ciò che è mostrato</string>
@@ -246,8 +244,6 @@
     <string name="report_title">Prima di segnalare</string>
     <string name="report_step_canary">Prova prima l\'ultima canary</string>
     <string name="report_step_canary_body">Potrebbe essere già risolto, e una build di debug è quello che serve ai manutentori per aiutarti. Resta su master — le build delle pull request sono instabili.</string>
-    <string name="report_step_zygisk">Non usi Magisk? Aggiorna Zygisk</string>
-    <string name="report_step_zygisk_body">Installa l\'ultima implementazione di Zygisk, nella build di debug se ne esiste una.</string>
     <string name="report_step_logs">Allega i log</string>
     <string name="report_step_logs_body">Una segnalazione senza log è una conversazione che ricomincia da capo. Questo scrive entrambi i log in uno zip che puoi allegare.</string>
     <string name="report_step_crashed">Se Zygisk è andato in crash</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">Apri il tracker dei problemi</string>
     <string name="report_save_with_root">Salva la cartella dei log (serve root)</string>
     <string name="report_saved_to">Salvato in %1$s</string>
-    <string name="report_see_guide">Guida completa nella issue</string>
     <string name="report_root_refused">Root negato. Autorizza HrÆLL nel tuo gestore root, poi riprova%1$s</string>
     <string name="home_custom_build">Build personalizzata — avanti rispetto a master</string>
     <string name="language_title">Lingua</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">Altre opzioni</string>
     <string name="classic_check_update">Controlla aggiornamenti</string>
     <string name="classic_project">Pagina del progetto</string>
-    <string name="store_no_browser">Nessun browser disponibile per aprire il collegamento di download.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Preferisci il browser predefinito</string>
+    <string name="settings_prefer_browser_summary">Attivo: usa il browser predefinito. Disattivo: il sistema sceglie l’app per ogni collegamento.</string>
+    <string name="links_choose_browser">Scegli un browser</string>
+    <string name="links_open_failed">Impossibile aprire questo collegamento. Verifica che sia disponibile un’app adatta.</string>
 </resources>

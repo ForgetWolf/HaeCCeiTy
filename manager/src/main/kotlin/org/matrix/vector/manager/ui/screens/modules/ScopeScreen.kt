@@ -55,7 +55,6 @@ import androidx.compose.material.icons.automirrored.rounded.Sort
 import androidx.compose.material3.Button
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -89,6 +88,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -105,6 +106,7 @@ import org.matrix.vector.manager.R
 import org.matrix.vector.manager.data.model.AppInfo
 import org.matrix.vector.manager.di.ServiceLocator
 import org.matrix.vector.ui.AppIcon
+import org.matrix.vector.ui.SelectionBadge
 import org.matrix.vector.ui.SnackbarTone
 import org.matrix.vector.ui.SharedSnackbarHost
 import org.matrix.vector.ui.show
@@ -975,17 +977,25 @@ private fun AppRow(
                         menuOpen = true
                     },
                 )
-                .semantics { role = Role.Checkbox },
+                .semantics {
+                    role = Role.Checkbox
+                    toggleableState = if (app.isSelectedInScope) ToggleableState.On else ToggleableState.Off
+                },
         leadingContent = {
             // The ring is drawn outside the icon rather than tinting it: an app icon is the user's
             // own landmark for finding a row and recolouring it would destroy that.
-            AppIcon(
-                applicationInfo = app.applicationInfo,
-                contentDescription = null,
-                size = 36.dp,
-                modifier =
-                    Modifier.border(width = 2.dp, color = ring, shape = CircleShape).padding(4.dp),
-            )
+            Box {
+                AppIcon(
+                    applicationInfo = app.applicationInfo,
+                    contentDescription = null,
+                    size = 36.dp,
+                    modifier =
+                        Modifier.border(width = 2.dp, color = ring, shape = CircleShape).padding(4.dp),
+                )
+                if (app.isSelectedInScope) {
+                    SelectionBadge(Modifier.align(Alignment.BottomEnd))
+                }
+            }
         },
         supportingContent = {
             Column {
@@ -1014,7 +1024,6 @@ private fun AppRow(
                 }
             }
         },
-        trailingContent = { Checkbox(checked = app.isSelectedInScope, onCheckedChange = null) },
         colors =
             ListItemDefaults.colors(
                 containerColor = Color.Transparent

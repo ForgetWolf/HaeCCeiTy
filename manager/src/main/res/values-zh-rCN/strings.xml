@@ -135,8 +135,6 @@
     <plurals name="settings_window_months">
         <item quantity="other">最近 %1$d 个月</item>
     </plurals>
-    <string name="settings_open_externally">用浏览器打开链接</string>
-    <string name="settings_open_externally_summary">关闭时：GitHub 页面在 HrÆLL 内打开。</string>
 
     <string name="scope_use_recommended">使用模块建议的范围</string>
     <string name="scope_select_visible">选中当前显示的全部</string>
@@ -236,8 +234,6 @@
     <string name="report_title">反馈之前</string>
     <string name="report_step_canary">先试试最新的 Canary 版本</string>
     <string name="report_step_canary_body">问题可能已经修复，而且维护者需要 Debug 版本才能帮你排查。请使用 master 分支的构建——来自 Pull Request 的构建并不稳定。</string>
-    <string name="report_step_zygisk">不用 Magisk？请更新 Zygisk</string>
-    <string name="report_step_zygisk_body">刷入最新的 Zygisk 实现，如果有 Debug 版本请优先使用。</string>
     <string name="report_step_logs">附上日志</string>
     <string name="report_step_logs_body">没有日志的反馈只能从头问起。此操作会把两份日志写入一个可供附加的 zip 文件。</string>
     <string name="report_step_crashed">如果 Zygisk 崩溃了</string>
@@ -245,7 +241,6 @@
     <string name="report_open_tracker">打开问题追踪页</string>
     <string name="report_save_with_root">保存日志文件夹（需要 Root）</string>
     <string name="report_saved_to">已保存至 %1$s</string>
-    <string name="report_see_guide">完整指南见 issue</string>
     <string name="report_root_refused">Root 请求被拒绝。请在你的 Root 管理器中允许 HrÆLL，然后重试%1$s</string>
     <string name="home_custom_build">自定义构建——领先于 master</string>
 
@@ -397,8 +392,13 @@
     <string name="action_install_other_user_prompt_app">选择要为其安装此应用的用户。</string>
     <string name="action_installed_other_user">已为 %1$s 安装。</string>
     <string name="action_install_other_user_failed">无法为 %1$s 安装。</string>
-    <string name="store_no_browser">没有可打开下载链接的浏览器。</string>
     <string name="classic_menu">更多选项</string>
     <string name="classic_check_update">检查更新</string>
     <string name="classic_project">项目主页</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">优先使用默认浏览器</string>
+    <string name="settings_prefer_browser_summary">开启时使用默认浏览器；关闭时由系统按链接关联选择打开方式。</string>
+    <string name="links_choose_browser">选择浏览器</string>
+    <string name="links_open_failed">无法打开此链接，请检查是否有可用的应用。</string>
 </resources>

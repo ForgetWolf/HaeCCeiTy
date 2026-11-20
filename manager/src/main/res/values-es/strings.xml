@@ -141,8 +141,6 @@
         <item quantity="one">Último %1$d mes</item>
         <item quantity="other">Últimos %1$d meses</item>
     </plurals>
-    <string name="settings_open_externally">Abrir los enlaces en un navegador</string>
-    <string name="settings_open_externally_summary">Desactivado: las páginas de GitHub se abren dentro de HrÆLL.</string>
 
     <string name="scope_use_recommended">Usar lo que el módulo pide</string>
     <string name="scope_select_visible">Seleccionar todo lo que se muestra</string>
@@ -246,8 +244,6 @@
     <string name="report_title">Antes de informar</string>
     <string name="report_step_canary">Prueba primero la última canary</string>
     <string name="report_step_canary_body">Puede que ya esté arreglado, y una compilación de depuración es lo que los mantenedores necesitan para ayudarte. Quédate en master: las compilaciones de pull request son inestables.</string>
-    <string name="report_step_zygisk">¿No usas Magisk? Actualiza Zygisk</string>
-    <string name="report_step_zygisk_body">Flashea la última implementación de Zygisk, en su compilación de depuración si existe.</string>
     <string name="report_step_logs">Adjunta los registros</string>
     <string name="report_step_logs_body">Un informe sin registros es una conversación que empieza de cero. Esto escribe ambos registros en un zip que puedes adjuntar.</string>
     <string name="report_step_crashed">Si Zygisk se ha caído</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">Abrir el gestor de incidencias</string>
     <string name="report_save_with_root">Guardar la carpeta de registros (requiere root)</string>
     <string name="report_saved_to">Guardado en %1$s</string>
-    <string name="report_see_guide">Guía completa en la incidencia</string>
     <string name="report_root_refused">Root denegado. Autoriza a HrÆLL en tu gestor de root y vuelve a intentarlo%1$s</string>
     <string name="home_custom_build">Compilación propia: por delante de master</string>
     <string name="language_title">Idioma</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">Más opciones</string>
     <string name="classic_check_update">Buscar actualizaciones</string>
     <string name="classic_project">Página del proyecto</string>
-    <string name="store_no_browser">No hay un navegador disponible para abrir el enlace de descarga.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Preferir el navegador predeterminado</string>
+    <string name="settings_prefer_browser_summary">Activado: usar el navegador predeterminado. Desactivado: el sistema elige la aplicación para cada enlace.</string>
+    <string name="links_choose_browser">Elegir navegador</string>
+    <string name="links_open_failed">No se pudo abrir este enlace. Comprueba que haya una aplicación compatible.</string>
 </resources>

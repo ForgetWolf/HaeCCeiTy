@@ -11,16 +11,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.ui.platform.LocalContext
-import org.matrix.vector.manager.R
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -52,6 +47,7 @@ import org.matrix.vector.manager.ui.navigation.TopLevelRoute
 import org.matrix.vector.manager.ui.navigation.Troubleshoot
 import org.matrix.vector.manager.ui.navigation.VectorNavPanelStore
 import org.matrix.vector.manager.ui.navigation.Web
+import org.matrix.vector.manager.ui.navigation.rememberExternalLinkOpener
 import org.matrix.vector.manager.ui.screens.canary.CanaryScreen
 import org.matrix.vector.manager.ui.screens.home.CrashTraceScreen
 import org.matrix.vector.manager.ui.screens.home.HomeScreen
@@ -169,7 +165,7 @@ private fun EntryProviderScope<NavKey>.registerRoutes(navigator: Navigator) {
     entry<TopLevelRoute.Home> {
         HomeScreen(
             onOpenStatus = { navigator.go(SystemStatus) },
-            onOpenUrl = { url -> navigator.go(Web(url)) },
+            onOpenUrl = rememberExternalLinkOpener(),
             onOpenReport = { navigator.go(Troubleshoot) },
             onOpenUpdate = { navigator.go(FrameworkUpdate()) },
         )
@@ -200,25 +196,14 @@ private fun EntryProviderScope<NavKey>.registerRoutes(navigator: Navigator) {
         )
     }
     entry<StoreDetail> { route ->
-        val context = LocalContext.current
+        val openExternal = rememberExternalLinkOpener()
         RepoDetailsScreen(
             packageName = route.packageName,
             onNavigateBack = { navigator.back() },
-            onOpenUrl = { url -> navigator.go(Web(url)) },
+            onOpenUrl = openExternal,
             dataSource = ServiceLocator.store,
             settings = ServiceLocator.settings,
-            onOpenDownload = { url ->
-                try {
-                    context.startActivity(
-                        Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
-                            selector = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_BROWSER)
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        }
-                    )
-                } catch (_: ActivityNotFoundException) {
-                    Toast.makeText(context, R.string.store_no_browser, Toast.LENGTH_SHORT).show()
-                }
-            },
+            onOpenDownload = openExternal,
             host = remember(route.packageName) { VectorStoreModuleInfo(route.packageName) },
             fetchSubresource = { fetchStoreSubresource(ServiceLocator.http, it) },
             contextForWebView = { ctx, dark -> ctx.forWebView(dark) },
@@ -237,7 +222,7 @@ private fun EntryProviderScope<NavKey>.registerRoutes(navigator: Navigator) {
     entry<Troubleshoot> {
         TroubleshootScreen(
             onNavigateBack = { navigator.back() },
-            onOpenUrl = { url -> navigator.go(Web(url)) },
+            onOpenUrl = rememberExternalLinkOpener(),
             onOpenCanary = { navigator.go(Canary) },
         )
     }

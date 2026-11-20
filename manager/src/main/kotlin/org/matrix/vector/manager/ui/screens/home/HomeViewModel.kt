@@ -166,7 +166,6 @@ class HomeViewModel(
     private val daemon: DaemonClient,
 ) : ViewModel() {
 
-    val openLinksExternally: StateFlow<Boolean> = ServiceLocator.settings.openLinksExternally
 
     val headerAmbience: StateFlow<String> = ServiceLocator.settings.headerAmbience
 

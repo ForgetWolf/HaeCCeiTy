@@ -141,8 +141,6 @@
         <item quantity="one">Dernier %1$d mois</item>
         <item quantity="other">%1$d derniers mois</item>
     </plurals>
-    <string name="settings_open_externally">Ouvrir les liens dans un navigateur</string>
-    <string name="settings_open_externally_summary">Désactivé : les pages GitHub s\'ouvrent dans HrÆLL.</string>
 
     <string name="scope_use_recommended">Prendre ce que le module demande</string>
     <string name="scope_select_visible">Tout sélectionner à l\'écran</string>
@@ -246,8 +244,6 @@
     <string name="report_title">Avant de signaler</string>
     <string name="report_step_canary">Essayez d\'abord la dernière canary</string>
     <string name="report_step_canary_body">C\'est peut-être déjà corrigé, et un build de débogage est ce dont les mainteneurs ont besoin pour vous aider. Restez sur master — les builds de pull request sont instables.</string>
-    <string name="report_step_zygisk">Pas sur Magisk ? Mettez Zygisk à jour</string>
-    <string name="report_step_zygisk_body">Flashez la dernière implémentation de Zygisk, dans son build de débogage s\'il en existe un.</string>
     <string name="report_step_logs">Joignez les journaux</string>
     <string name="report_step_logs_body">Un rapport sans journaux est une conversation qui recommence à zéro. Ceci écrit les deux journaux dans un zip que vous pouvez joindre.</string>
     <string name="report_step_crashed">Si Zygisk a planté</string>
@@ -255,7 +251,6 @@
     <string name="report_open_tracker">Ouvrir le suivi des problèmes</string>
     <string name="report_save_with_root">Enregistrer le dossier des journaux (root requis)</string>
     <string name="report_saved_to">Enregistré dans %1$s</string>
-    <string name="report_see_guide">Guide complet dans le ticket</string>
     <string name="report_root_refused">Root refusé. Autorisez HrÆLL dans votre gestionnaire root, puis réessayez%1$s</string>
     <string name="home_custom_build">Build personnalisé — en avance sur master</string>
     <string name="language_title">Langue</string>
@@ -410,5 +405,10 @@
     <string name="classic_menu">Plus d’options</string>
     <string name="classic_check_update">Rechercher des mises à jour</string>
     <string name="classic_project">Page du projet</string>
-    <string name="store_no_browser">Aucun navigateur ne permet d’ouvrir le lien de téléchargement.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Privilégier le navigateur par défaut</string>
+    <string name="settings_prefer_browser_summary">Activé : utiliser le navigateur par défaut. Désactivé : laisser le système choisir une application pour chaque lien.</string>
+    <string name="links_choose_browser">Choisir un navigateur</string>
+    <string name="links_open_failed">Impossible d’ouvrir ce lien. Vérifiez qu’une application adaptée est disponible.</string>
 </resources>

@@ -18,7 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Folder
-import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material.icons.rounded.Science
 import androidx.compose.material.icons.rounded.Terminal
@@ -28,7 +27,6 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -61,8 +59,7 @@ import org.matrix.vector.ui.show
  * What to try, and what to bring, before opening an issue.
  *
  * The tracker sits at the foot of the screen rather than being the whole of it, because the first
- * reply to a bug report is a checklist — try the latest canary, update your Zygisk implementation,
- * attach logs — and a screen can *do* most of that instead of describing it.
+ * reply to a bug report is a checklist — try the latest canary and attach logs — and a screen can *do* most of that instead of describing it.
  *
  * The part worth the screen is the logs. A report without them is a conversation that has to start
  * over, and the two ways of getting them are not equivalent:
@@ -171,17 +168,6 @@ fun TroubleshootScreen(
 
             item {
                 Step(
-                    icon = Icons.AutoMirrored.Rounded.OpenInNew,
-                    title = stringResource(R.string.report_step_zygisk),
-                    body = stringResource(R.string.report_step_zygisk_body),
-                    titleAction = {
-                        OutlinedButton(onClick = { onOpenUrl(NEO_ZYGISK) }) { Text("NeoZygisk") }
-                    },
-                )
-            }
-
-            item {
-                Step(
                     icon = Icons.Rounded.Save,
                     title = stringResource(R.string.report_step_logs),
                     body = stringResource(R.string.report_step_logs_body),
@@ -246,21 +232,7 @@ fun TroubleshootScreen(
                             Spacer(Modifier.width(8.dp))
                             Text(stringResource(R.string.report_save_with_root))
                         }
-                        Spacer(Modifier.height(10.dp))
-                        // The adb route is a link rather than a printed one-liner: it only helps
-                        // someone at a computer, and that reader is better served by the thread,
-                        // where it sits in context and stays current.
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(
-                                stringResource(R.string.report_see_guide),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                            Spacer(Modifier.width(4.dp))
-                            OutlinedButton(onClick = { onOpenUrl(GUIDE_ISSUE_URL) }) {
-                                Text("#$GUIDE_ISSUE")
-                            }
-                        }
+
                     }
                 }
             }
@@ -275,7 +247,6 @@ private fun Step(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     title: String,
     body: String,
-    titleAction: (@Composable () -> Unit)? = null,
     action: (@Composable () -> Unit)? = null,
 ) {
     Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp)) {
@@ -293,11 +264,6 @@ private fun Step(
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.weight(1f, fill = false),
             )
-            // A step whose whole action is one link does not need a line of its own for it.
-            titleAction?.let {
-                Spacer(Modifier.width(8.dp))
-                it()
-            }
         }
         Spacer(Modifier.height(6.dp))
         Text(
@@ -340,7 +306,3 @@ private fun exportWithRoot(): Result<String> = runCatching {
 
 /** Root said no, or there is none. Carries whatever `su` had to say, which is often nothing. */
 private class RootRefused(output: String) : Exception(output)
-
-private const val NEO_ZYGISK = "https://github.com/JingMatrix/NeoZygisk"
-private const val GUIDE_ISSUE = 123
-private const val GUIDE_ISSUE_URL = "https://github.com/JingMatrix/Vector/issues/$GUIDE_ISSUE"

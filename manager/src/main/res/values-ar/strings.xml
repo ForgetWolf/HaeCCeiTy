@@ -165,8 +165,6 @@
         <item quantity="many">آخر %1$d شهرًا</item>
         <item quantity="other">آخر %1$d شهر</item>
     </plurals>
-    <string name="settings_open_externally">فتح الروابط في المتصفح</string>
-    <string name="settings_open_externally_summary">عند الإيقاف: تُفتح صفحات GitHub داخل HrÆLL.</string>
 
     <string name="scope_use_recommended">استخدام ما تطلبه الوحدة</string>
     <string name="scope_select_visible">تحديد كل ما هو ظاهر</string>
@@ -286,8 +284,6 @@
     <string name="report_title">قبل أن تُبلِغ</string>
     <string name="report_step_canary">جرّب أحدث canary أولًا</string>
     <string name="report_step_canary_body">قد تكون المشكلة قد أُصلحت، وإصدار التنقيح هو ما يحتاجه المشرفون لمساعدتك. ابقَ على master — إصدارات طلبات السحب غير مستقرة.</string>
-    <string name="report_step_zygisk">لا تستخدم Magisk؟ حدِّث Zygisk</string>
-    <string name="report_step_zygisk_body">ثبّت أحدث تطبيق لـ Zygisk، بإصدار التنقيح إن وُجد.</string>
     <string name="report_step_logs">أرفِق السجلات</string>
     <string name="report_step_logs_body">البلاغ بلا سجلات محادثة تبدأ من الصفر. هذا يكتب السجلين في ملف zip يمكنك إرفاقه.</string>
     <string name="report_step_crashed">إذا انهار Zygisk</string>
@@ -295,7 +291,6 @@
     <string name="report_open_tracker">فتح متتبّع المشكلات</string>
     <string name="report_save_with_root">حفظ مجلد السجلات (يحتاج روت)</string>
     <string name="report_saved_to">حُفظ في %1$s</string>
-    <string name="report_see_guide">الدليل الكامل في المشكلة</string>
     <string name="report_root_refused">رُفض الروت. اسمح لـ HrÆLL في مدير الروت لديك ثم أعد المحاولة%1$s</string>
     <string name="home_custom_build">إصدار خاص — أحدث من master</string>
     <string name="language_title">اللغة</string>
@@ -454,5 +449,10 @@
     <string name="classic_menu">المزيد من الخيارات</string>
     <string name="classic_check_update">التحقق من وجود تحديثات</string>
     <string name="classic_project">صفحة المشروع</string>
-    <string name="store_no_browser">لا يوجد متصفح لفتح رابط التنزيل.</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">تفضيل المتصفح الافتراضي</string>
+    <string name="settings_prefer_browser_summary">عند التفعيل: استخدام المتصفح الافتراضي. عند الإيقاف: يختار النظام التطبيق لكل رابط.</string>
+    <string name="links_choose_browser">اختيار متصفح</string>
+    <string name="links_open_failed">تعذر فتح هذا الرابط. تحقق من وجود تطبيق مناسب.</string>
 </resources>

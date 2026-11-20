@@ -212,8 +212,6 @@
         <item quantity="one">Last %1$d month</item>
         <item quantity="other">Last %1$d months</item>
     </plurals>
-    <string name="settings_open_externally">Open links in a browser</string>
-    <string name="settings_open_externally_summary">Off: GitHub pages open inside HrÆLL.</string>
 
     <!-- Scope editor -->
     <string name="scope_use_recommended">Use what the module asks for</string>
@@ -368,8 +366,6 @@
     <string name="report_title">Before you report</string>
     <string name="report_step_canary">Try the latest canary first</string>
     <string name="report_step_canary_body">It may already be fixed, and a debug build is what maintainers need to help you. Stay on master — pull-request builds are unstable.</string>
-    <string name="report_step_zygisk">Not on Magisk? Update Zygisk</string>
-    <string name="report_step_zygisk_body">Flash the latest Zygisk implementation, in its debug build if one exists.</string>
     <string name="report_step_logs">Attach logs</string>
     <string name="report_step_logs_body">A report without logs is a conversation that starts over. This writes both logs to a zip you can attach.</string>
     <string name="report_step_crashed">If Zygisk crashed</string>
@@ -377,7 +373,6 @@
     <string name="report_open_tracker">Open the issue tracker</string>
     <string name="report_save_with_root">Save the log folder (needs root)</string>
     <string name="report_saved_to">Saved to %1$s</string>
-    <string name="report_see_guide">Full guide in issue</string>
     <string name="report_root_refused">Root refused. Allow HrÆLL in your root manager, then try again%1$s</string>
     <string name="home_custom_build">Custom build — ahead of master</string>
     <string name="language_title">Language</string>
@@ -452,8 +447,13 @@
     <string name="action_install_other_user_prompt_app">Choose the user to install this app for.</string>
     <string name="action_installed_other_user">Installed for %1$s.</string>
     <string name="action_install_other_user_failed">Could not install for %1$s.</string>
-    <string name="store_no_browser">No browser is available to open the download link.</string>
     <string name="classic_menu">More options</string>
     <string name="classic_check_update">Check for updates</string>
     <string name="classic_project">Project</string>
+
+    <!-- External link routing; the store README remains embedded. -->
+    <string name="settings_prefer_browser">Prefer the default browser</string>
+    <string name="settings_prefer_browser_summary">On: use the default browser. Off: let the system choose the app for each link.</string>
+    <string name="links_choose_browser">Choose a browser</string>
+    <string name="links_open_failed">Could not open this link. Check that a suitable app is available.</string>
 </resources>
