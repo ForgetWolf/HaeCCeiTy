@@ -4,4 +4,4 @@ version=${versionName} (${versionCode}-${versionHash})
 versionCode=${versionCode}
 author=ACRTIMP
 description=HrÆLL — A modern, Xposed-compatible framework for Android application hooking. (Android 8.1 ~ 17)
-updateJson=https://raw.githubusercontent.com/JingMatrix/Vector/master/zygisk/update.json
+updateJson=https://raw.githubusercontent.com/ForgetWolf/HraELL/main/zygisk/update.json

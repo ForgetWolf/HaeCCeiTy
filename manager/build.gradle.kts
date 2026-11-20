@@ -94,7 +94,7 @@ android {
         buildConfigField("String", "TRANSLATIONS", "\"${translations.joinToString(",")}\"")
     }
 
-    // ic_launcher.xml references @drawable/ic_statue_monochrome, which lives in the
+    // ic_launcher.xml references @drawable/ic_hraell_monochrome, which lives in the
     // daemon's resources. Any name collision between the two resource sets becomes a
     // build error, so keep additions on the daemon side namespaced.
     sourceSets { getByName("main") { res.directories.add("../daemon/src/main/res") } }

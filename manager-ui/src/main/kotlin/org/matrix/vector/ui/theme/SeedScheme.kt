@@ -37,8 +37,7 @@ import kotlin.math.sin
 object SeedScheme {
 
     /**
-     * The Winged Victory's patina — the deepest of the eight tones in `ic_winged_victory.xml` — and
-     * the app's identity colour when nothing else is chosen.
+     * The default accent inherited from Vector's teal palette, when nothing else is chosen.
      */
     const val DEFAULT_SEED: Int = 0xFF6ABFCF.toInt()
 

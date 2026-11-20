@@ -2,4 +2,5 @@
 <resources>
     <!-- Default background (White) -->
     <color name="ic_launcher_bg">#FFFFFF</color>
+    <color name="ic_launcher_fg">#171C20</color>
 </resources>

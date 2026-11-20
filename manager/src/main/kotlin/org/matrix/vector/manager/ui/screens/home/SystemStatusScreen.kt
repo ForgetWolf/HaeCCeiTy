@@ -637,8 +637,8 @@ private fun CrashFact(
  * before it is read at all.
  *
  * A row may end in a [InfoItem.detail], set smaller and in the muted colour. It is part of the same
- * value and stays in the same line — a reader copying a version out by hand still gets all of it —
- * but it is not what the row is looked up for. On the build rows that is where the stamp came from;
+ * value, so copying a version still includes all of it. Build rows put the version on its own
+ * line and the commit plus detail on the next. The detail says where the stamp came from;
  * the commit is what someone comparing two devices reads, and the repository or machine after it is
  * two thirds of the characters and almost never the answer.
  */
@@ -709,7 +709,7 @@ internal data class InfoItem(
 )
 
 /**
- * A build row: the version number, the commit, and — set apart — where that build was made.
+ * A build row: the version on one line, then the commit and where that build was made.
  *
  * The stamp leads with the commit and says where after it, so the split is the commit's own length
  * and needs no second opinion about which half is which. What is left includes the separator, which
@@ -722,7 +722,7 @@ internal data class InfoItem(
 private fun buildRow(label: String, number: String, reported: String?): InfoItem {
     val stamp = reported?.takeIf { it.isNotBlank() } ?: return InfoItem(label, number)
     val commit = buildStamp(stamp).commit.orEmpty()
-    return InfoItem(label, "$number  ·  $commit", detail = stamp.removePrefix(commit))
+    return InfoItem(label, "$number\n$commit", detail = stamp.removePrefix(commit))
 }
 
 /** A heading, so the page reads as three short lists rather than one long one. */

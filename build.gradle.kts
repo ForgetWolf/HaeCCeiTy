@@ -33,30 +33,10 @@ abstract class GitCommitCountValueSource : ValueSource<String, ValueSourceParame
         }
         // Return the count if successful, otherwise a default of "1".
         return if (result.exitValue == 0 && output.toString().isNotBlank()) {
-            // The main branch starts with a snapshot of upstream build 3119.
-            (3119L + output.toString().trim().toLong()).toString()
+            // Count HraELL's own main history, without the upstream build-number offset.
+            output.toString().trim().toLong().toString()
         } else {
-            "3120"
-        }
-    }
-}
-
-/** A ValueSource that executes 'git tag' to get the latest version tag. */
-abstract class GitLatestTagValueSource : ValueSource<String, ValueSourceParameters.None> {
-    @get:Inject abstract val execOperations: ExecOperations
-
-    override fun obtain(): String {
-        val output = ByteArrayOutputStream()
-        val result = execOperations.exec {
-            commandLine("git", "tag", "--list", "--sort=-v:refname")
-            standardOutput = output
-            isIgnoreExitValue = true
-        }
-        // If successful, parse the first line. Provide a default if no tags are found.
-        return if (result.exitValue == 0 && output.toString().isNotBlank()) {
-            output.toString().lineSequence().first().removePrefix("v")
-        } else {
-            "2.2"
+            "1"
         }
     }
 }
@@ -217,7 +197,8 @@ val versionHashProvider =
         )
         parameters.buildCommit.set(providers.environmentVariable("VECTOR_BUILD_COMMIT").orElse(""))
     }
-val versionNameProvider = providers.of(GitLatestTagValueSource::class.java) {}
+// HraELL release version; independent of upstream tags and the monotonic build code.
+val versionNameProvider = providers.provider { "0.1" }
 
 val injectedPackageName = "com.android.shell"
 val injectedPackageUid = 2000

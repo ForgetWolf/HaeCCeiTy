@@ -827,7 +827,8 @@ class GitHubRepository(
             return tagName.removePrefix(CANARY_TAG_PREFIX).toLongOrNull()
         }
         return ours.firstNotNullOfOrNull { asset ->
-            Regex("(\\d{3,})").findAll(asset.name).map { it.value }.lastOrNull()?.toLongOrNull()
+            Regex("^${Regex.escape(ZIP_PREFIX)}v.+-(\\d+)-(?:Release|Debug)\\.zip$", RegexOption.IGNORE_CASE)
+                .matchEntire(asset.name)?.groupValues?.get(1)?.toLongOrNull()
         }
     }
 
@@ -924,8 +925,8 @@ class GitHubRepository(
             .getOrDefault(0L)
 
     companion object {
-        const val OWNER = "JingMatrix"
-        const val REPO = "$OWNER/Vector"
+        const val OWNER = "ForgetWolf"
+        const val REPO = "$OWNER/HraELL"
         const val REPO_URL = "https://github.com/$REPO"
         const val ISSUES_URL = "$REPO_URL/issues"
         const val PULLS_URL = "$REPO_URL/pulls"
@@ -940,7 +941,7 @@ class GitHubRepository(
          */
         const val CANARY_URL =
             "$REPO_URL/actions/workflows/core.yml" +
-                "?query=event%3Apush+branch%3Amaster+is%3Acompleted"
+                "?query=event%3Apush+branch%3Amain+is%3Acompleted"
         private const val CANARY_TAG_PREFIX = "canary-"
 
         /**
@@ -949,7 +950,7 @@ class GitHubRepository(
          * The release list still carries the pre-rename LSPosed builds, whose version codes are
          * from a different and higher numbering; see `versionCode()`.
          */
-        private const val ZIP_PREFIX = "Vector-"
+        private const val ZIP_PREFIX = "HraELL-"
 
         /** CI keeps five; a few extra are fetched so a stable release among them costs nothing. */
         private const val CANARY_FETCH = 12

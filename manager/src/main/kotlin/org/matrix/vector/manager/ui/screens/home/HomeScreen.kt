@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.matrix.vector.manager.R
+import org.matrix.vector.manager.data.github.GitHubRepository
 import org.matrix.vector.manager.ui.components.FrameworkState
 import org.matrix.vector.manager.ui.components.statusWordRes
 import org.matrix.vector.manager.ui.theme.VectorLocaleController
@@ -112,7 +113,7 @@ fun HomeScreen(
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.classic_project)) },
                             trailingIcon = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null) },
-                            onClick = { menuOpen = false; onOpenUrl("https://github.com/JingMatrix/Vector") },
+                            onClick = { menuOpen = false; onOpenUrl(GitHubRepository.REPO_URL) },
                         )
                     }
                 },

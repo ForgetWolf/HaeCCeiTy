@@ -2,4 +2,5 @@
 <resources>
     <!-- Dark Mode background -->
     <color name="ic_launcher_bg">#121212</color>
+    <color name="ic_launcher_fg">#D4E5F6</color>
 </resources>
