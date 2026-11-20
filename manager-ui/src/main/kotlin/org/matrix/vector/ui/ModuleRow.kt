@@ -2,15 +2,16 @@ package org.matrix.vector.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -146,16 +147,18 @@ fun ModuleRow(
                 if (selected) {
                     Box(
                         modifier =
-                            Modifier.fillMaxSize()
-                                .clip(CircleShape)
-                                .background(colors.primary.copy(alpha = 0.85f)),
+                            Modifier.align(Alignment.BottomEnd)
+                                .offset(x = 2.dp, y = 2.dp)
+                                .size(20.dp)
+                                .background(colors.primary, CircleShape)
+                                .border(2.dp, colors.surface, CircleShape),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
                             Icons.Rounded.Check,
                             contentDescription = null,
                             tint = colors.onPrimary,
-                            modifier = Modifier.size(30.dp),
+                            modifier = Modifier.size(12.dp),
                         )
                     }
                 }
